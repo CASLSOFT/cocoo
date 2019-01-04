@@ -92,15 +92,18 @@ class NoveltyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Novelty $novelty)
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'f_initial' => 'required|date',
-            'f_final'   => 'required|date',
-            'type_nomina'   => 'required|in:P,F,T'
-        ]);
+        // $this->validate($request, [
+        //     'f_initial' => 'required|date',
+        //     'f_final'   => 'required|date',
+        //     'type_nomina'   => 'required|in:P,F,T'
+        // ]);
+        $novelty = Novelty::findOrFail($id);
 
-        $novelty->update($request->all());
+        $novelty->observation = $request->get("observation");
+        
+        $novelty->save();
     }
 
     /**

@@ -73,6 +73,8 @@
                 identificacion:'',
                 firstname:'',
                 lastname:'',
+                position: '',
+                contract: '',
                 email:'',
                 area:'',
                 CO:'',
@@ -108,6 +110,8 @@
                 this.fillEmployee.identificacion = item.identificacion;
                 this.fillEmployee.firstname = item.firstname;
                 this.fillEmployee.lastname = item.lastname;
+                this.fillEmployee.position = item.position;
+                this.fillEmployee.contract = item.contract;
                 this.fillEmployee.email = item.email;
                 this.fillEmployee.area = item.area;
                 this.fillEmployee.CO = item.CO;

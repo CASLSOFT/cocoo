@@ -58,8 +58,8 @@
                 <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
                 <td>{{ $item->admissiondate }}</td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $item->position }}</td>
+                <td>{{ $item->contract }}</td>
                 <td>{{ number_format($item->salary, 0, ".", ",") }}</td>
             </tr>
         @endforeach
@@ -69,8 +69,8 @@
                 <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
                 <td></td>
                 <td>{{ $item->admissiondate }}</td>
-                <td></td>
-                <td></td>
+                <td>{{ $item->position }}</td>
+                <td>{{ $item->contract }}</td>
                 <td>{{ number_format($item->salary, 0, ".", ",") }}</td>
             </tr>
         @empty
@@ -364,7 +364,7 @@
     <div class="titulotabla" style="text-align:left;">
         Observaciones
     </div>
-    <div class="bordecompleto">
+    <div style="border: 1px solid black; padding: 1em;">
         <p>
             {!! $novelty->observation !!}
         </p>

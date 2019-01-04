@@ -96,8 +96,8 @@
                                         <td v-text="item.f_final"></td>
                                         <td v-text="item.type_nomina"></td>
                                         <td style="text-align: center">
-                                            <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a>
-                                            <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a>
+                                            {{-- <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a> --}}
+                                            {{-- <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a> --}}
                                             <a :href="'pdf/' + item.id"><i class="material-icons xs-3">picture_as_pdf</i></a>
                                         </td>                                    
                                     </tr>                        

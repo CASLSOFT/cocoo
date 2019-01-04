@@ -11,9 +11,8 @@
             <div class="modal-body">
                 <div class="panel-body">
                     {{-- formulario de edición --}}
-                    <form @submit.prevent="updateNovelty(fillNovelty.id)" 
-                            @keydown="fillNovelty.errors.clear($event.target.name)" 
-                            @Change="fillNovelty.errors.clear($event.target.name)">
+                    <form @submit.prevent="updateNovelty(fillNovelty.id)" >
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row">
                                 <div class="col-md-12">
                                     <fieldset>
@@ -23,26 +22,21 @@
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Fecha Inicial</label>
                                                     <input type="date" name="f_initial" class="form-control" v-model="fillNovelty.f_initial" disabled="true">
-                                                </div>
-                                                <span  class="label label-danger" v-if="form.errors.has('f_initial')" v-text="form.errors.get('f_initial')"></span>
+                                                </div>                                                
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Fecha Final</label>
                                                     <input type="date" name="f_final" class="form-control" v-model="fillNovelty.f_final" disabled="true">
-                                                </div>
-                                                <span  class="label label-danger" v-if="form.errors.has('f_final')" v-text="form.errors.get('f_final')"></span>
+                                                </div>                                                
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Tipo Nomina</label>
                                                     <input name="f_final" class="form-control" v-model="fillNovelty.type_nomina" disabled="true">
-                                                </div>
-                                                <span  class="label label-danger" v-if="form.errors.has('type_nomina')" v-text="form.errors.get('type_nomina')"></span>
+                                                </div>                                                
                                             </div>
-                                        </div>
-                                        {{-- <div class="row">
-                                        </div> --}}
+                                        </div>                                        
                                     </fieldset>
                                 </div>                                
                             </div>
@@ -50,7 +44,6 @@
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Observaciones:</label>
-                                        {{-- <textarea class="form-control" rows="15" v-html="fillNovelty.observation"></textarea> --}}
                                         <ckeditor v-model="fillNovelty.observation" name="observation"></ckeditor>
                                     </div>
                                 </div>

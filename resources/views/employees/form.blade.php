@@ -77,7 +77,27 @@
                                     <span  class="label label-danger" v-if="form.errors.has('lastname')" v-text="form.errors.get('lastname')"></span>
                                 </div>                            
                             </div>                            
-                        </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label >Cargo</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input name="position" class="form-control" v-model="form.position">
+                                    </div>
+                                    <span  class="label label-danger" v-if="form.errors.has('position')" v-text="form.errors.get('position')"></span>
+                                </div>                            
+                            </div>
+                            <div class="col-md-6">
+                                <label >Tipo de Contrato</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input name="contract" class="form-control" v-model="form.contract">
+                                    </div>
+                                    <span  class="label label-danger" v-if="form.errors.has('contract')" v-text="form.errors.get('contract')"></span>
+                                </div>                            
+                            </div>                            
+                        </div>                          
                         <div class="row">                            
                             <div class="col-md-5"> 
                                 <label for="email_address">Email</label>
@@ -169,6 +189,8 @@
                 identificacion:'',
                 firstname:'',
                 lastname:'',
+                position: '',
+                contract: '',
                 email:'',
                 area:'',
                 CO:'',
@@ -179,8 +201,7 @@
             })            
         },
         methods: {
-            create(datos) {
-                
+            create(datos) {                
                 this.form.submit('post','/employee')
                 .then(response => toastr.success('Creado con exito!', 'Empleado'))
                 .catch(error => this.form.errors.record(error.errors));

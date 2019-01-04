@@ -51,6 +51,22 @@
                                     <span  class="label label-danger" v-if="fillEmployee.errors.has('lastname')" v-text="fillEmployee.errors.get('lastname')"></span>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Cargo</label>
+                                        <input type="text" name="position" class="form-control" v-model="fillEmployee.position">
+                                    </div>
+                                    <span  class="label label-danger" v-if="fillEmployee.errors.has('position')" v-text="fillEmployee.errors.get('position')"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Tipo de Contrato</label>
+                                        <input type="text" name="contract" class="form-control" v-model="fillEmployee.contract">
+                                    </div>
+                                    <span  class="label label-danger" v-if="fillEmployee.errors.has('contract')" v-text="fillEmployee.errors.get('contract')"></span>
+                                </div>
+                            </div>
                             <div class="row">                                                                
                                 <div class="col-md-12">
                                     <div class="form-group label-floating">
