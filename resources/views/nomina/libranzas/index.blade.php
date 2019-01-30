@@ -82,8 +82,8 @@
                                 </div>
                                 <span  class="label label-danger" v-if="form.errors.has('entidad')" v-text="form.errors.get('entidad')"></span>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div>                        
+                        <div class="col-md-4">
                             <p><b>Categoria</b></p>
                             <select class="form-control" v-model="form.category" name="category">
                                 {{-- <option value="">Seleccione</option> --}}
@@ -92,6 +92,14 @@
                                 <option value="EMBARGO">Embargo</option>
                             </select>
                             <span  class="label label-danger" v-if="form.errors.has('category')" v-text="form.errors.get('category')"></span>
+                        </div>
+                        <div class="col-md-2">
+                            <p><b>Qincena</b></p>
+                            <div>
+                                <input type="checkbox" id="basic_checkbox_1" checked="" v-model="form.first_quincena">
+                                <label for="basic_checkbox_1">Primera</label>                                
+                            </div>
+                            <span  class="label label-danger" v-if="form.errors.has('first_quincena')" v-text="form.errors.get('first_quincena')"></span>
                         </div>
                     </div>                                    
                     <button type="submit" class="btn btn-primary pull-right">Guardar</button>
@@ -121,6 +129,7 @@
                 cuota_de:'',
                 cuota_hasta:'',
                 entidad:'',
+                first_quincena:false,
                 category:''
             }) 
         },

@@ -27,8 +27,8 @@ class LibranzaController extends Controller
                         ->join('libranzas', function($join){
                             $join->on('employees.id', '=', 'libranzas.employee_id');
                         })                        
-                        ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'libranzas.id', 'libranzas.cuota_mensual', 'libranzas.cuota_quincenal', 'libranzas.cuota_de', 'libranzas.cuota_hasta', 'libranzas.entidad', 'libranzas.category', 'libranzas.status')
-                        ->groupBy('libranzas.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'libranzas.cuota_mensual', 'libranzas.cuota_quincenal', 'libranzas.cuota_de', 'libranzas.cuota_hasta', 'libranzas.entidad', 'libranzas.category', 'libranzas.status')
+                        ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'libranzas.id', 'libranzas.cuota_mensual', 'libranzas.cuota_quincenal', 'libranzas.cuota_de', 'libranzas.cuota_hasta', 'libranzas.entidad', 'libranzas.category', 'libranzas.status', 'libranzas.first_quincena')
+                        ->groupBy('libranzas.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'libranzas.cuota_mensual', 'libranzas.cuota_quincenal', 'libranzas.cuota_de', 'libranzas.cuota_hasta', 'libranzas.entidad', 'libranzas.category', 'libranzas.status', 'libranzas.first_quincena'  )
                         ->orderBy('employees.firstname', 'ASC')
                                 ->where('libranzas.status', $status)
                         ->paginate(10);
@@ -154,6 +154,22 @@ class LibranzaController extends Controller
         return $errors;
     }
 
+    //validamos que las cuotas se pueda liquidar
+    public function validateQuincenaAmortizar(Request $request)
+    {
+        $fecha_inic = $request->fecha_inic;
+        $fecha_final = $request->fecha_final;
+
+        $fecha_inic = explode('-', $fecha_inic);
+        $fecha_final = explode('-', $fecha_final);
+
+        if ($fecha_inic[2] == 1 && $fecha_final[2] == 15) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function amortizar(Request $request)
     {
 
@@ -162,22 +178,46 @@ class LibranzaController extends Controller
             'fecha_final' => 'required|date'
         ]);
 
+        if ($request->first_quincena) {
+            
+        }
+
+
         //validamos las amortizaciones
         if ($this->validateFechas($request)->count() > 0) {
-            return new JsonResponse(['message' => 'periodo amortizado'], 422);
+            return new JsonResponse(['message' => 'Periodo Amortizado'], 422);
         }
         
-        //aumentamos en 1 la cuota_de
+        //consultamnos si podemos amortizar las libranzas de empleados con la marcasion primera quincena
+        $quincena = $this->validateQuincenaAmortizar($request);
 
-        $cuotas = DB::table('libranzas')
-                    ->where('status', true)
-                    ->update(['cuota_de' => DB::raw('ROUND(cuota_de + 1)')]);
 
-        //consultamos todas las libranzas activas
-        $libranzas = Libranza::where('status', true)                    
-                    ->get();
+        //aumentamos en 1 la cuota_de todas las libranzas
+        if ($quincena) {
+            $cuotas = DB::table('libranzas')
+                        ->where('status', true)
+                        ->update(['cuota_de' => DB::raw('ROUND(cuota_de + 1)')]);
 
-        // //actualizamos las libranzas completadas
+            //consultamos todas las libranzas activas
+            $libranzas = Libranza::where('status', true)                        
+                        ->get();
+        }
+
+        //aumentamos en 1 la cuota_de de las libranzas de la segunda quincena
+        if (!$quincena) {
+            $cuotas = DB::table('libranzas')
+                        ->where('status', true)
+                        ->where('first_quincena', false)
+                        ->update(['cuota_de' => DB::raw('ROUND(cuota_de + 1)')]);
+            
+            //consultamos todas las libranzas activas
+            $libranzas = Libranza::where('status', true)
+                        ->where('first_quincena', false)                    
+                        ->get();
+        }
+
+
+        //actualizamos las libranzas completadas
         $libranzascomplete = DB::table('libranzas')
                             ->whereRaw('cuota_de >= cuota_hasta')
                             ->where('status', true)
@@ -199,15 +239,6 @@ class LibranzaController extends Controller
             ]);
         }
         
-        return $libranzas;
-    }
-
-    public function getAmortizaciones()
-    {
-        $amorizacion = AmortizacionLibranza::select('fecha_inic', 'fecha_final')
-                        ->groupBy('fecha_inic', 'fecha_final')                        
-                        ->get();
-
-        return $amorizacion;
+        //return $libranzas;
     }
 }

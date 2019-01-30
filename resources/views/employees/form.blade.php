@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Guardar</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" :disabled="form.errors.any()">Guardar</button>
                     </form>
                 </div>
             </div>

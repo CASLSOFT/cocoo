@@ -35,6 +35,7 @@
                             <th>Hasta</th>
                             <th>Entidad</th>
                             <th>Categoria</th>
+                            <th>Q</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -49,6 +50,7 @@
                             <td v-text="item.cuota_hasta" style="text-align: right"></td>
                             <td v-text="item.entidad"></td>
                             <td v-text="item.category"></td>
+                            <td v-text="item.first_quincena == 1 ? 'S' : 'N'"></td>
                             <td>
                                 {{-- <a href="#" :class="item.status == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'" 
                                 @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a> --}}
@@ -99,7 +101,8 @@
                 cuota_de:'',
                 cuota_hasta:'',
                 entidad:'',
-                category:''
+                category:'',
+                first_quincena: false
             }),
             libranzas: {
                 total: 0,
@@ -134,7 +137,7 @@
                     });
             },
             getAmortizaciones(){
-                let url = '/nomina/libranzas/amortizaciones';
+                let url = '/nomina/amortizaciones';
                 axios.get(url).then(response => {                        
                         this.amortizaciones = response.data;
                     });
@@ -152,7 +155,8 @@
                 this.fillLibranza.cuota_de = item.cuota_de;
                 this.fillLibranza.cuota_hasta = item.cuota_hasta;
                 this.fillLibranza.entidad = item.entidad;
-                this.fillLibranza.category = item.category;                
+                this.fillLibranza.category = item.category;
+                this.fillLibranza.first_quincena = item.first_quincena;
 
                 $('#edit').modal('show');
             },

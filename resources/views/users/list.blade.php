@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.AdminBSB')
 
 @section('title')
     Consulta Usuarios
@@ -22,6 +22,8 @@
                             <th>#</th>
                             <th>Nombres</th>
                             <th>Username</th>
+                            <th>Email</th>
+                            <th>Area</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -30,10 +32,12 @@
                             <td v-text="index+1"></td>
                             <td v-text="item.firstname"></td>
                             <td v-text="item.username"></td>
+                            <td v-text="item.email"></td>
+                            <td v-text="item.area"></td>
                             <td>
                                 <a href="#" :class="item.state == 1 ? 'glyphicon glyphicon-thumbs-up' : 'glyphicon glyphicon-thumbs-down'" 
                                 @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a>
-                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="fa fa-edit fa-fw"></i></a>
+                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">edit</i></a>
                             </td>
                         </tr>                        
                     </tbody>

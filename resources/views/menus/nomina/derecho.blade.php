@@ -98,6 +98,12 @@
                                 <span>Consultar</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('libranza.tbamortizacion') }}">
+                                <i class="material-icons col-amber">table_chart</i>
+                                <span>Tabla Amortizacion</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

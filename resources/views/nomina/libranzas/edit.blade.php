@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <p><b># Cuota De:</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -40,9 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <p><b># Cuota Hasta</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -51,7 +49,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <p><b>Entidad Recaudadora</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -65,13 +65,20 @@
                                     {{-- crear una tabla con estos campos --}}
                                     <label class="control-label">Categoria</label>
                                     <select class="form-control" v-model="fillLibranza.category" name="category">
-                                        {{-- <option value="">Seleccione</option> --}}
                                         <option value="LIBRANZA">Libranza</option>
                                         <option value="DESCUENTO">Descuento Voluntario</option>
                                         <option value="EMBARGO">Embargo</option>
                                     </select>
                                 </div>
                                 <span  class="label label-danger" v-if="fillLibranza.errors.has('category')" v-text="fillLibranza.errors.get('category')"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <p><b>Qincena</b></p>
+                                <div>
+                                    <input type="checkbox" id="basic_checkbox_1" checked="" v-model="fillLibranza.first_quincena">
+                                    <label for="basic_checkbox_1">Primera</label>                                
+                                </div>
+                                <span  class="label label-danger" v-if="fillLibranza.errors.has('first_quincena')" v-text="form.errors.get('first_quincena')"></span>
                             </div>
                         </div>
                         <div class="row">

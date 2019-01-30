@@ -59,32 +59,4 @@
             </a>
         </div>        
     </div>
-
-    {{-- <div class="container">
-        <div class="box box-1">
-            <div class="cover"><img src="https://upload-images.jianshu.io/upload_images/3433202-893bc9989a52eba0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></div>
-            <a href="#">
-                <button class="menusanimados"><div></div></button>                
-            </a>
-        </div>
-        <div class="box box-2">
-            <div class="cover"><img src="https://upload-images.jianshu.io/upload_images/3433202-964edcf0f07211b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></div>
-            <a href="{{ route('nomina') }}">
-                <button class="menusanimados"><div></div></button>
-            </a>
-        </div>
-        <div class="box box-3">
-            <div class="cover"><img src="https://upload-images.jianshu.io/upload_images/3433202-2ebb2b6f93add843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></div>
-            <a href="#">
-                <button class="menusanimados"><div></div></button>                
-            </a>
-        </div>
-        <div class="box box-4">
-            <div class="cover"><img src="https://upload-images.jianshu.io/upload_images/3433202-f79c4cc8de2f84ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></div>
-            <a href="#">
-                <button class="menusanimados"><div></div></button>                
-            </a>
-        </div>
-    </div> --}}
-
 @endsection

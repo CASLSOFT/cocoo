@@ -24,24 +24,24 @@
     <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" /> --}}
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="{{ asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" /> --}}
 
     <!-- Wait Me Css -->
-    <link href="{{ asset('plugins/waitme/waitMe.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('plugins/waitme/waitMe.css') }}" rel="stylesheet" /> --}}
 
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" /> --}}
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"> --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 
@@ -90,16 +90,17 @@
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->username }}</div>
-                    <div class="email">{{ Auth::user()->email }}</div>                    
+                    <div class="email">{{ Auth::user()->email }}</div>
                 </div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
-            @if ($_SERVER["REQUEST_URI"] == "/home")
+            @include('menus.menuleft')
+            {{-- @if ($_SERVER["REQUEST_URI"] == "/home")
                 @include('menus.menuleft')                        
             @else
                 @include('layouts.nomina')                        
-            @endif           
+            @endif  --}}          
             
             <!-- #Menu -->
             <!-- Footer -->
@@ -112,7 +113,7 @@
         <!-- #END# Right Sidebar -->
     </section>
 
-    <section class="content">
+    <section class="content" id="main">
         <div class="container-fluid">
             @yield('page-content')
         </div>

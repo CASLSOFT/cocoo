@@ -130,6 +130,7 @@ class NoveltyController extends Controller
     public function pdf($id)
     {      
         $novelty = Novelty::findOrFail($id);
+        $holiday = new Holiday();
         $fecha = Carbon::parse($novelty->f_initial);
         $nomina = $novelty->type_nomina;
         
@@ -139,7 +140,7 @@ class NoveltyController extends Controller
 
         $amortizacion = $novelty->getAmortizaciones($novelty->f_initial, $novelty->f_final, $nomina);
 
-        $vacaciones = $novelty->getHolidays($fecha, $nomina);
+        $vacaciones = $holiday->getHolidays($fecha, $nomina);
 
 
         $tnls = $novelty->getTNLs($fecha, $nomina);

@@ -9,57 +9,51 @@
 @endsection
 
 @section('page-content')
-    <div class="container-fluid">        
-        <div class="row">            
-            <div class="col-md-8">
-                <div class="row clearfix">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="col-md-6">
-                                Listado de Amortizaciones
-                            </div>
-                            <div style="text-align: right">
-                                <button type="button" class="btn bg-teal waves-effect">Inactivas</button>
-                                <button type="button" class="btn bg-teal waves-effect">Activas</button>
-                                <button type="button" class="btn bg-teal waves-effect">Amortizar</button>
-                            </div>
-                        </div>
-                        <div class="panel-body">                        
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Fecha Inicial</th>
-                                            <th>Fecha Final</th>
-                                            <th>Tipo</th>
-                                            <th style="text-align: center">Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(item, index) in noveltys.data">
-                                            <td v-text="index+1"></td>
-                                            <td v-text="item.f_initial"></td>
-                                            <td v-text="item.f_final"></td>
-                                            <td v-text="item.type_nomina"></td>
-                                            <td style="text-align: center">
-                                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a>
-                                                <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a>
-                                                <a :href="'pdf/' + item.id"><i class="material-icons xs-3">picture_as_pdf</i></a>
-                                            </td>                                    
-                                        </tr>                        
-                                    </tbody>
-                                </table>
-                                <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
-                            </div>                        
-                            
-                        </div>
-                    </div>    
-                </div>
-            </div>
+
+<div class="col-lg-10">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Listado de Amortizaciones
         </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha Inicial</th>
+                            <th>Fecha Final</th>
+                            <th>Tipo</th>
+                            <th style="text-align: center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in noveltys.data">
+                            <td v-text="index+1"></td>
+                            <td v-text="item.f_initial"></td>
+                            <td v-text="item.f_final"></td>
+                            <td v-text="item.type_nomina"></td>
+                            <td style="text-align: center">
+                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a>
+                                <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a>
+                                <a :href="'pdf/' + item.id"><i class="material-icons xs-3">picture_as_pdf</i></a>
+                            </td>                                    
+                        </tr>                      
+                    </tbody>
+                </table>
+                <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
     </div>
-    @include('nomina.novelty.edit')
+    <!-- /.panel -->
+</div>
+
+{{-- MODAL para editar novedad --}}
+@include('nomina.novelty.edit')
+
 @endsection
 
 @section('footer-scripts')

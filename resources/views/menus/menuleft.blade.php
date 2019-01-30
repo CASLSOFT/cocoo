@@ -266,7 +266,51 @@
                 </li>
             </ul>
         </li> --}}
-        {{-- <li>
+        <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+                <i class="material-icons col-blue">account_box</i>
+                <span>Usuarios</span>
+            </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="{{ route('user.create') }}">
+                        <i class="material-icons col-indigo">face</i>
+                        <span>Crear Usuario</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('user.index') }}">
+                        <i class="material-icons col-amber">search</i>
+                        <span>Consultar Usurios</span>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <span>Level - 2</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Menu Item</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <span>Level - 3</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span>Level - 4</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> --}}
+            </ul>
+        </li>
+        <li>
             <a href="javascript:void(0);" class="menu-toggle">
                 <i class="material-icons">trending_down</i>
                 <span>Multi Level Menu</span>
@@ -307,7 +351,7 @@
                     </ul>
                 </li>
             </ul>
-        </li> --}}
+        </li>
         {{-- <li>
             <a href="pages/changelogs.html">
                 <i class="material-icons">update</i>
@@ -333,5 +377,16 @@
                 <span>Information</span>
             </a>
         </li> --}}
+        <li>
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                <i class="material-icons">update</i>
+                <span>Salir</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </li>
     </ul>
 </div>

@@ -21,6 +21,22 @@ class UsersTableSeeder extends Seeder
                 'state'     => true,
         	]);
 
-        factory(User::class, 10)->create();
+        factory(User::class)->create([
+                'firstname' => 'KELLY',
+                'lastname'  => 'PETRO HERNANDEZ',
+                'username'  => 'KELLY',
+                'email'     => 'aux_administrativa@coodescor.org.co',
+                'area'      => 'administracion',
+                'state'     => true,
+            ]);
+
+        factory(User::class)->create([
+                'firstname' => 'STEFANIA',
+                'lastname'  => 'BOLAÑOS PEREZ',
+                'username'  => 'STEFANIA',
+                'email'     => 'contabilidad2@coodescor.org.co',
+                'area'      => 'administracion',
+                'state'     => true,
+            ]);        
     }
 }

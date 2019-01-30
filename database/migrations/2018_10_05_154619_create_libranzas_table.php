@@ -22,6 +22,7 @@ class CreateLibranzasTable extends Migration
             $table->string('entidad');
             $table->string('category');
             $table->boolean('status')->default(true);
+            $table->boolean('first_quincena')->default(false);
             $table->integer('employee_id')->unsigned();
             $table->timestamps();
 

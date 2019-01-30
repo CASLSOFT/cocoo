@@ -99,7 +99,7 @@
         </div>
     </section>
 
-    @include('menus.script')
+    @include('menus.script')    
     @yield('footer-scripts')
 </body>
 
