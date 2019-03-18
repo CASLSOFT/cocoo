@@ -14565,6 +14565,11 @@ Vue.component('VuePagination', __webpack_require__(44));
 Vue.component('VueAutocomplete', __webpack_require__(47));
 Vue.component('ckeditor', __webpack_require__(50));
 
+// if (process.env.MIX_APP_ENV === 'production') {
+//     Vue.config.devtools = false;
+//     Vue.config.debug = false;
+//     Vue.config.silent = true; 
+// }
 // const app = new Vue({
 //     el: '#main'
 // });
@@ -14598,6 +14603,7 @@ try {
 window.axios = __webpack_require__(20);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.baseURL = 'http://10.10.20.7/cocoo';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -48379,7 +48385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     height: {
       type: String,
-      default: '90px'
+      default: '180px'
     },
     language: {
       type: String,
@@ -48442,7 +48448,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "ckeditor" }, [
     _c("textarea", {
-      attrs: { id: _vm.id, name: _vm.name, rows: "15" },
+      attrs: { id: _vm.id, name: _vm.name, rows: "55" },
       domProps: { value: _vm.value }
     })
   ])

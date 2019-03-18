@@ -1,7 +1,7 @@
 @extends('layouts.nomina')
 
 @section('title')
-    Crear Libranzas
+    Crear Amortización
 @endsection
 
 @section('page-header')
@@ -12,7 +12,7 @@
     <div class="card">
         <div class="header text-white bg-green">
             <font>
-                <h4>Crear Libranza</h4>
+                <h4>Crear Amortización</h4>
             </font>
         </div>
         <!-- /.panel-heading -->
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <p><b>Entidad Recaudadora</b></p>
                             <div class="input-group input-group-lg">
                                 <div class="form-line">
@@ -83,7 +83,7 @@
                                 <span  class="label label-danger" v-if="form.errors.has('entidad')" v-text="form.errors.get('entidad')"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <p><b>Categoria</b></p>
                             <select class="form-control" v-model="form.category" name="category">
                                 {{-- <option value="">Seleccione</option> --}}
@@ -93,13 +93,19 @@
                             </select>
                             <span  class="label label-danger" v-if="form.errors.has('category')" v-text="form.errors.get('category')"></span>
                         </div>
-                        <div class="col-md-2">
-                            <p><b>Qincena</b></p>
-                            <div>
-                                <input type="checkbox" id="basic_checkbox_1" checked="" v-model="form.first_quincena">
-                                <label for="basic_checkbox_1">Primera</label>
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Fecha Inicial</label>
+                                <input type="date" name="f_initial" class="form-control" v-model="form.fecha_inic">
                             </div>
-                            <span  class="label label-danger" v-if="form.errors.has('first_quincena')" v-text="form.errors.get('first_quincena')"></span>
+                            <span  class="label label-danger" v-if="form.errors.has('fecha_inic')" v-text="form.errors.get('fecha_inic')"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Fecha Final</label>
+                                <input type="date" name="f_final" class="form-control" v-model="form.fecha_final">
+                            </div>
+                            <span  class="label label-danger" v-if="form.errors.has('fecha_final')" v-text="form.errors.get('fecha_final')"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary pull-right">Guardar</button>
@@ -129,12 +135,10 @@
                 cuota_de:'',
                 cuota_hasta:'',
                 entidad:'',
-                first_quincena:false,
-                category:''
+                category:'',
+                fecha_inic:'',
+                fecha_final:''
             })
-        },
-        mounted() {
-
         },
         methods: {
             showEmployee(id){
@@ -145,10 +149,9 @@
                 });
             },
             create(datos) {
-                this.form.submit('post','/nomina/libranza')
+                this.form.submit('post','/nomina/addtbamortizacion')
                 .then(response => {
-                    toastr.success('Creada con exito!', 'Libranza');
-                    this.form.first_quincena = false;
+                    toastr.success('Creada con exito!', 'Cuota de Amortización');
                 })
                 .catch(error => this.form.errors.record(error.errors));
                 this.items = {};

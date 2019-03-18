@@ -102,7 +102,7 @@ class NoveltyController extends Controller
         $novelty = Novelty::findOrFail($id);
 
         $novelty->observation = $request->get("observation");
-        
+
         $novelty->save();
     }
 
@@ -123,31 +123,31 @@ class NoveltyController extends Controller
                   ->where('f_final', '<=', $request->f_final)
                   ->where('type_nomina', '=', $request->type_nomina)
                   ->get();
-        
+
         return $errors;
     }
 
     public function pdf($id)
-    {      
+    {
         $novelty = Novelty::findOrFail($id);
         $holiday = new Holiday();
-        $fecha = Carbon::parse($novelty->f_initial);
+        $fechainicial = Carbon::parse($novelty->f_initial);
+        $fechafinal = Carbon::parse($novelty->f_final);
         $nomina = $novelty->type_nomina;
-        
-        $ingresos = $novelty->getIngresos($fecha, $nomina);
 
-        $retiros = $novelty->getRetiros($fecha, $nomina);
+        $ingresos = $novelty->getIngresos($fechainicial, $nomina);
+
+        $retiros = $novelty->getRetiros($fechainicial, $nomina);
 
         $amortizacion = $novelty->getAmortizaciones($novelty->f_initial, $novelty->f_final, $nomina);
 
-        $vacaciones = $holiday->getHolidays($fecha, $nomina);
+         $vacaciones = $holiday->getHolidays($fechainicial, $fechafinal, $nomina);
 
+        $tnls = $novelty->getTNLs($fechainicial, $nomina);
 
-        $tnls = $novelty->getTNLs($fecha, $nomina);
+        $hec = $novelty->getHEC($fechainicial, $nomina);
 
-        $hec = $novelty->getHEC($fecha, $nomina);
-
-        $retencion = $novelty->getRetention($fecha, $nomina);
+        $retencion = $novelty->getRetention($fechainicial, $nomina);
 
         // Consultas para llenar PDF
 
@@ -155,6 +155,7 @@ class NoveltyController extends Controller
         $pdf->loadView('pdf.novelty', compact('ingresos', 'retiros', 'amortizacion', 'vacaciones', 'tnls', 'hec', 'retencion', 'novelty'));
         $pdf->setPaper('letter');
         return $pdf->stream();
+        // return $pdf->download('novedades.pdf');
     }
 
     public function list()

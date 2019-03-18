@@ -12,7 +12,7 @@ try {
     // window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    
+
 } catch (e) {}
 
 /**
@@ -24,6 +24,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.baseURL = 'http://10.10.20.7/cocoo';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

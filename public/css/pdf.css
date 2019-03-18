@@ -21,16 +21,16 @@ hr {
     padding: 0;
 }
 
-header { 
+header {
     position: fixed;
     top: 10mm;
     margin-left: 5mm;
     margin-right: 6mm;
-    
-} 
-    
-    #footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 150px; background-color: lightblue; } 
-    #footer .page:after { content: counter(page, upper-roman); } 
+
+}
+
+    #footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 150px; background-color: lightblue; }
+    #footer .page:after { content: counter(page, upper-roman); }
 
 table {
     border-collapse: collapse;
@@ -48,10 +48,10 @@ td {
 
 th {
     background-color: #D3D3D3;
-    text-align: center;    
+    text-align: center;
 }
 
-img {    
+img {
     width: 100px;
     height: 50px;
 }
@@ -92,6 +92,7 @@ img {
 .titulotabla {
     background-color: #D3D3D3;
     font-weight: bold;
+    font-size: 12px;
     border-left: 1px solid black;
     border-top: 1px solid black;
     border-right: 1px solid black;
@@ -106,38 +107,3 @@ img {
     text-transform: uppercase;
     font-size: 10px;
 }
-/* css para probar */
-
-/*body{
-font:12px Arial, Tahoma, Verdana, Helvetica, sans-serif;
-background-color:#BECEDC;
-color:#000;
-}
-
-a h1{
-font-size:35px; 
-color:#FFF;
-}
-
-h2{
-color:#FC0;
-font-size:15px; 
-}
-
-table{
-width:100%;
-height:auto;
-margin:10px 0 10px 0;
-border-collapse:collapse;
-text-align:center;
-background-color:#365985;
-color:#FFF;
-}
-
-table td,th{
-border:1px solid black;
-}
-
-table th{
-color:#FC0; 
-}*/

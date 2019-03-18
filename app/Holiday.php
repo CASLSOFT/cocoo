@@ -11,24 +11,25 @@ class Holiday extends Model
 
     protected $fillable = ['since', 'until', 'days','employee_id'];
 
-	protected $appends = ['fechaIngreso'];
+	protected $dates = ['since', 'until'];
 
     public function employee()
     {
     	return $this->belongsTo(Employee::class);
     }
 
-    public function getFechaIngresoAttribute()
+    public function getHolidays($fechainicial, $fechafinal, $nomina)
     {
-        return Carbon::createFromFormat('Y-m-d','2019-01-23' )->addDay()->toDateTimeString();
-    }
+        $holidays = Holiday::join('employees', 'employees.id', '=', 'holidays.employee_id')
+                    ->where('employees.type_nomina', $nomina)
+                    ->orWhereMonth('until', $fechafinal->month)
+                    ->whereMonth('since', $fechainicial->month)
+                    ->get();
 
-    public function getHolidays($fecha, $nomina)
-    {
-        return \DB::table('holidays')
-                ->join('employees', 'employees.id', '=', 'holidays.employee_id')
-                ->whereMonth('since', $fecha->month)
-                ->where('employees.type_nomina', $nomina)
-                ->get();
+        $filtered_collection = $holidays->filter(function($item) use ($nomina)
+            {
+                return $item['type_nomina'] === $nomina;
+         });
+        return $filtered_collection;
     }
 }

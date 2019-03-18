@@ -20,16 +20,16 @@ class HolidayController extends Controller
     }
 
     public function list()
-    {        
+    {
         $holidays = DB::table('employees')
                         ->join('holidays', function($join){
                             $join->on('employees.id', '=', 'holidays.employee_id');
-                        })                        
+                        })
                         ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'holidays.id', 'holidays.since', 'holidays.until', 'holidays.days')
                         ->groupBy('holidays.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'holidays.since', 'holidays.until', 'holidays.days')
                         ->orderBy('holidays.id', 'DES')
-                        ->paginate(2);
-        
+                        ->paginate(10);
+
         return $holidays;
     }
 
@@ -59,7 +59,6 @@ class HolidayController extends Controller
             ]);
 
         $holiday->create($request->all());
-
         return $holiday;
     }
 

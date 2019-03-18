@@ -23,21 +23,18 @@
             <td>16/11/2017</td>
           </tr>
         </table>
-        <br>
-        <table>
+        <table style="margin-top: 3px;">
             <tr>
-                <td style="width: 30%;" class="negritagris">Período liquidado en la nómina:</td>
+                <td style="width: 30.8%;" class="negritagris">Período liquidado en la nómina:</td>
                 <td>
                     <div style="width: 25%; float:left;">Desde:</div>
-                    <div style="width: 25%; float:left;">1/01/2018</div>
+                    <div style="width: 25%; float:left;">{{ $novelty->f_initial }}</div>
                     <div style="width: 25%; float:left;">Hasta:</div>
-                    <div style="width: 25%; float:left;">15/01/2018</div>
-                </td>                
+                    <div style="width: 25%; float:left;">{{ $novelty->f_final }}</div>
+                </td>
             </tr>
         </table>
     </header>
-
-    <br>    
     <!-- Tablde Ingresos Y Retiros -->
     <div class="titulotabla">
         INGRESOS Y RETIROS
@@ -47,8 +44,8 @@
             <th style="width: 70px">Centro de Operación</th>
             <th style="width: 180px">Nombre del Funcionario</th>
             <th style="width: 90px">Fecha Ingreso</th>
-            <th style="width: 90px">Fecha Retiro</th>                    
-            <th style="width: 120px">Cargo</th>                    
+            <th style="width: 90px">Fecha Retiro</th>
+            <th style="width: 120px">Cargo</th>
             <th >Tipo de Contrato</th>
             <th >Salario</th>
         </tr>
@@ -58,8 +55,8 @@
                 <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
                 <td>{{ $item->admissiondate }}</td>
                 <td></td>
-                <td>{{ $item->position }}</td>
-                <td>{{ $item->contract }}</td>
+                <td class="textmayusc">{{ $item->position }}</td>
+                <td class="textmayusc">{{ $item->contract }}</td>
                 <td>{{ number_format($item->salary, 0, ".", ",") }}</td>
             </tr>
         @endforeach
@@ -68,15 +65,15 @@
                 <td>{{ $item->CO }}</td>
                 <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
                 <td></td>
-                <td>{{ $item->admissiondate }}</td>
-                <td>{{ $item->position }}</td>
-                <td>{{ $item->contract }}</td>
+                <td>{{ $item->retirementdate }}</td>
+                <td class="textmayusc">{{ $item->position }}</td>
+                <td class="textmayusc">{{ $item->contract }}</td>
                 <td>{{ number_format($item->salary, 0, ".", ",") }}</td>
             </tr>
         @empty
             <tr>
                 <td>&nbsp;</td>
-                <td class="textleft textmayusc"></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -87,19 +84,19 @@
     </table>
     <br>
     <!-- Tablde Libranzas -->
-    <div class="titulotabla">
+    <div class="titulotabla" style="page-break-before: auto;">
         CREDITOS POR LIBRANZA
     </div>
     <table>
         <tr>
             <th style="width: 70px">Centro de Operación</th>
-            <th style="width: 180px">Nombre del Funcionario</th>
+            <th style="width: 215px">Nombre del Funcionario</th>
             <th style="width: 90px">Cuota Mensual</th>
             <th style="width: 90px">Cuota Quincenal</th>
             <th style="width: 60px">Cuota de</th>
             <th style="width: 60px">Cuota Hasta</th>
             <th >Entidad Financiera</th>
-        </tr>        
+        </tr>
         @forelse ($amortizacion as $item)
             @if ($item->category == 'LIBRANZA')
                 <tr>
@@ -110,32 +107,23 @@
                     <td>{{ $item->cuota_de }}</td>
                     <td>{{ $item->cuota_hasta }}</td>
                     <td>{{ $item->entidad }}</td>
-                </tr>   
+                </tr>
             @endif
         @empty
             <tr>
                 <td>&nbsp;</td>
-                <td class="textleft"></td>  
+                <td class="textleft"></td>
                 <td></td>
-                <td></td> 
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
-        @endforelse 
-            <tr>
-                <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>       
+        @endforelse
     </table>
     <br>
     <!-- Tablde Descuentos Voluntarios -->
-        <div class="titulotabla">
+        <div class="titulotabla" style="page-break-before: auto;">
             DESCUENTOS VOLUNTARIOS
         </div>
         <table>
@@ -148,45 +136,45 @@
                 <th style="width: 60px">Cuota Hasta</th>
                 <th >Entidad Financiera</th>
             </tr>
-            
-        @forelse ($amortizacion as $item)
-            @if ($item->category == 'DESCUENTO')
+
+            @forelse ($amortizacion as $item)
+                @if ($item->category == 'DESCUENTO')
+                    <tr>
+                        <td>{{ $item->CO }}</td>
+                        <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                        <td>{{ number_format($item->cuota_mensual, 0, ".", ",") }}</td>
+                        <td>{{ number_format($item->cuota_quincenal, 0, ".", ",") }}</td>
+                        <td>{{ $item->cuota_de }}</td>
+                        <td>{{ $item->cuota_hasta }}</td>
+                        <td>{{ $item->entidad }}</td>
+                    </tr>
+                @endif
+            @empty
                 <tr>
-                    <td>{{ $item->CO }}</td>
-                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
-                    <td>{{ number_format($item->cuota_mensual, 0, ".", ",") }}</td>
-                    <td>{{ number_format($item->cuota_quincenal, 0, ".", ",") }}</td>
-                    <td>{{ $item->cuota_de }}</td>
-                    <td>{{ $item->cuota_hasta }}</td>
-                    <td>{{ $item->entidad }}</td>
-                </tr>               
-            @endif
-        @empty
+                    <td>&nbsp;</td>
+                    <td class="textleft"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforelse
             <tr>
                 <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
+                <td class="textleft"></td>
                 <td></td>
                 <td></td>
-                <td></td>
-            </tr>
-        @endforelse 
-            <tr>
-                <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
         </table>
-        
-        
+
+
         <br>
         <!-- Tablde vACACIONES -->
-        <div class="titulotabla">
+        <div class="titulotabla" style="page-break-before: auto;">
             VACACIONES
         </div>
         <table >
@@ -205,23 +193,22 @@
                     <td>{{ $item->since }}</td>
                     <td>{{ $item->until }}</td>
                     <td>{{ $item->days }}</td>
-                    <td>{{ $item->until }}</td>
-                </tr>                
+                    <td>{!! \Carbon\Carbon::parse($item->until)->addDay()->format('d-m-Y') !!}</td>
+                </tr>
             @empty
                 <tr>
-                <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
-                <td></td>
-                <td></td>
-            </tr>
+                    <td>&nbsp;</td>
+                    <td class="textleft"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             @endforelse
-            
         </table>
     <br>
     <!-- Tablde Tiempos no Laborados -->
-    <div class="titulotabla">
+    <div class="titulotabla" style="page-break-before: auto;">
         TIEMPOS NO LABORADOS
     </div>
     <table>
@@ -229,7 +216,7 @@
             <th style="width: 70px">Centro de Operación</th>
             <th style="width: 180px">Nombre del Funcionario</th>
             <th style="width: 90px">Desde</th>
-            <th style="width: 90px">Hasta</th>                    
+            <th style="width: 90px">Hasta</th>
             <th style="width: 230px">Tipo: EG: Enfermedad General LM: Licencia de Maternidad LP: Licencia de Paternidad LL: Ley de Luto S:Suspensión PNR: Permiso No Remunerado</th>
             <th >Número de días</th>
         </tr>
@@ -241,13 +228,13 @@
                 <td>{{ $item->until }}</td>
                 <td>{{ $item->typeTNL }}</td>
                 <td>{{ $item->days }}</td>
-            </tr>                
+            </tr>
         @empty
             <tr>
             <td>&nbsp;</td>
-            <td class="textleft"></td>  
+            <td class="textleft"></td>
             <td></td>
-            <td></td> 
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -255,7 +242,7 @@
     </table>
     <br>
     <!-- Tabla HE y Comisiones -->
-    <div class="titulotabla">
+    <div class="titulotabla" style="page-break-before: auto;">
         HORAS EXTRAS Y COMISIONES
     </div>
     <table>
@@ -265,7 +252,7 @@
             <th >Fecha o Mes</th>
             <th >Valor Comisión ó # HE</th>
             <th >Tipo</th>
-        </tr>        
+        </tr>
         @forelse ($hec as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
@@ -273,11 +260,11 @@
                 <td>{{ $item->lapso }}</td>
                 <td>{{ number_format($item->value, 0, ".", ",") }}</td>
                 <td>{{ $item->typeHE }}</td>
-            </tr>                
+            </tr>
         @empty
             <tr>
             <td>&nbsp;</td>
-            <td class="textleft"></td>  
+            <td class="textleft"></td>
             <td></td>
             <td></td>
             <td></td>
@@ -286,7 +273,7 @@
     </table>
     <br>
     <!-- Tabla Retención en la Fuente -->
-    <div class="titulotabla">
+    <div class="titulotabla" style="page-break-before: auto;">
         RETENCION EN LA FUENTE
     </div>
     <table>
@@ -304,11 +291,11 @@
                 <td>{{ number_format($item->income, 0, ".", ",") }}</td>
                 <td>{{ number_format($item->value, 0, ".", ",") }}</td>
                 <td>{{ $item->process }}</td>
-            </tr>                
+            </tr>
         @empty
             <tr>
             <td>&nbsp;</td>
-            <td class="textleft"></td>  
+            <td class="textleft"></td>
             <td></td>
             <td></td>
             <td></td>
@@ -317,7 +304,7 @@
     </table>
     <br>
     <!-- Embargos -->
-    <div class="titulotabla">
+    <div class="titulotabla" style="page-break-before: auto;">
         EMBARGOS
     </div>
     <table>
@@ -325,10 +312,10 @@
             <th style="width: 70px">Centro de Operación</th>
             <th style="width: 180px">Nombre del Funcionario</th>
             <th style="width: 90px">Primera Quincena</th>
-            <th style="width: 90px">Segunda Quincena</th>                    
+            <th style="width: 90px">Segunda Quincena</th>
             <th style="width: 90px">Total</th>
             <th >Entidad</th>
-        </tr> 
+        </tr>
         @forelse ($amortizacion as $item)
             @if ($item->category == 'EMBARGO')
                 <tr>
@@ -341,27 +328,19 @@
                 </tr>
             @endif
         @empty
-            <tr>
-                <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
-                <td></td>
-                <td></td>
-            </tr>
         @endforelse
-            <tr>
-                <td>&nbsp;</td>
-                <td class="textleft"></td>  
-                <td></td>
-                <td></td> 
-                <td></td>
-                <td></td>
-            </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="textleft"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
     <br>
     <!-- Observaciones -->
-    <div class="titulotabla" style="text-align:left;">
+    <div class="titulotabla" style="text-align:left; page-break-before: auto;">
         Observaciones
     </div>
     <div style="border: 1px solid black; padding: 1em;">

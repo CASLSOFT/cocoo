@@ -40,15 +40,8 @@ class Novelty extends Model
                 ->where('fecha_inic', '>=', $fecha_inic)
                 ->where('fecha_final', '<=', $fecha_final)
                 ->where('employees.type_nomina', $nomina)
-                ->get();
-    }
-
-    public function getHolidays($fecha, $nomina)
-    {
-        return DB::table('employees')
-                ->join('holidays', 'employees.id', '=', 'holidays.employee_id')
-                ->whereMonth('since', $fecha->month)
-                ->where('employees.type_nomina', $nomina)
+                ->orderBy('Amortizacion_libranzas.entidad')
+                ->orderBy('Employees.firstname')
                 ->get();
     }
 

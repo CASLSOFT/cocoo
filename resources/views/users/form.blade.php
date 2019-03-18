@@ -118,7 +118,7 @@
         },
         methods: {
             createUser(datos) {
-                this.form.submit('post','/user')
+                this.form.submit('post','user')
                 .then(response => toastr.success('Creado con exito!', 'Usuario'))
                 .catch(error => this.form.errors.record(error.response.data));
             }

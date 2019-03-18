@@ -5,7 +5,7 @@
 @endsection
 
 @section('page-header')
-    
+
 @endsection
 @section('page-content')
 <div class="col-md-9">
@@ -16,8 +16,8 @@
             </div>
             <div style="text-align: right">
                 <button @click="getInactivas" type="button" class="btn bg-teal waves-effect">Inactivas</button>
-                <button @click="getLibranzas" type="button" class="btn bg-teal waves-effect">Activas</button>
-                <button @click="getAmortizar" type="button" class="btn bg-teal waves-effect">Amortizar</button>                
+                <button @click="getActivas" type="button" class="btn bg-teal waves-effect">Activas</button>
+                <button @click="getAmortizar" type="button" class="btn bg-teal waves-effect">Amortizar</button>
           </div>
         </div>
         <!-- /.panel-heading -->
@@ -52,7 +52,7 @@
                             <td v-text="item.category"></td>
                             <td v-text="item.first_quincena == 1 ? 'S' : 'N'"></td>
                             <td>
-                                {{-- <a href="#" :class="item.status == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'" 
+                                {{-- <a href="#" :class="item.status == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"
                                 @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a> --}}
                                 <a href="#" @click="getActive(item.id)" alt="Activar o Inactivar Usuario">
                                     <i v-if="item.state" class="material-icons">check</i>
@@ -60,7 +60,7 @@
                                 </a>
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#Modal"><i class="material-icons">edit</i></a>
                             </td>
-                        </tr>                        
+                        </tr>
                     </tbody>
                 </table>
                 <vue-pagination  :pagination="libranzas" @paginate="getLibranzas()" :offset="2"></vue-pagination>
@@ -74,7 +74,7 @@
 <div class="col-md-3">
     <h4>Ultimas Amortizaciones</h4>
     <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action" v-for="item in amortizaciones" >@{{ item.fecha_inic }} Hasta @{{ item.fecha_final }}</a>      
+      <a href="#" class="list-group-item list-group-item-action" v-for="item in amortizaciones" >@{{ item.fecha_inic }} Hasta @{{ item.fecha_final }}</a>
     </div>
 </div>
 
@@ -125,28 +125,30 @@
         },
         methods: {
             getInactivas(){
-                let url = '/nomina/libranzas/list/0?page='+this.libranzas.current_page;
-                axios.get(url).then(response => {                        
-                        this.libranzas = response.data;
-                    });
+                this.status = 0;
+                this.getLibranzas();
+            },
+            getActivas(){
+                this.status = 1;
+                this.getLibranzas();
             },
             getLibranzas() {
-                let url = '/nomina/libranzas/list/1?page='+this.libranzas.current_page;
-                axios.get(url).then(response => {                        
+                let url = '/nomina/libranzas/list/' + this.status + '?page='+this.libranzas.current_page;
+                axios.get(url).then(response => {
                         this.libranzas = response.data;
                     });
             },
             getAmortizaciones(){
                 let url = '/nomina/amortizaciones';
-                axios.get(url).then(response => {                        
+                axios.get(url).then(response => {
                         this.amortizaciones = response.data;
                     });
             },
             getActive(id) {
                 let url = '/nomina/libranzas/'+id;
                 axios.put(url).then(response => {
-                        this.getLibranzas();              
-                    });   
+                        this.getLibranzas();
+                    });
             },
             getEdit(item) {
                 this.fillLibranza.id = item.id;
@@ -163,7 +165,7 @@
             updateLibranza(id) {
                 let url = '/nomina/libranza/'+id;
                 this.fillLibranza.submit('put',url)
-                .then(response => {                    
+                .then(response => {
                     this.fillLibranza;
                     $('#edit').modal('hide');
                     toastr.success('Actualizada', 'Libranza');
@@ -193,11 +195,11 @@
                         } else {
                             this.amortizacion.errors.record(error.response.data);
                         }
-                    });                    
+                    });
                 }
             }
         }
     });
-    
+
 </script>
 @endsection

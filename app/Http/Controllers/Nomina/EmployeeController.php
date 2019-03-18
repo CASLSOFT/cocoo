@@ -18,13 +18,18 @@ class EmployeeController extends Controller
         return view('employees.list', compact('employees'));
     }
 
-    public function list()
+    public function list($status)
     {
-        $employees = Employee::where('retirementdate')
+        if ($status) {
+            $employees = Employee::where('retirementdate')
                     ->orderBy('firstname', 'ASC')
                     ->paginate(10);
-
-        return response()->json($employees);
+        } else {
+            $employees = Employee::where('retirementdate', '<>', NULL)
+                    ->orderBy('firstname', 'ASC')
+                    ->paginate(10);
+        }
+        return $employees;
     }
 
     public function search(Request $request)
@@ -104,7 +109,7 @@ class EmployeeController extends Controller
             'position'      =>'required|min:3',
             'contract'       =>'required|min:3',
             'email'          =>'required|unique:employees,email,' . $id,
-            'area'           =>'required|in:administracion,comercial,farmacia',            
+            'area'           =>'required|in:administracion,comercial,farmacia',
             'CO'             =>'required',
             'type_nomina'   => 'required|in:P,F,T',
             'admissiondate'  =>'required|date',

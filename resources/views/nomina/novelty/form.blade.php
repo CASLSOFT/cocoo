@@ -18,7 +18,7 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="header" style="background-color:#CD5DDD;">
                         <font color="white">
@@ -57,8 +57,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <br>    
-                                            <button type="submit" class="btn btn-primary pull-right" v-if="actualiza">crear</button>
-                                            <button type="submit" class="btn btn-primary pull-right" v-else>Actualizar</button>
+                                            <button type="submit" class="btn btn-primary pull-right" >crear</button>                                            
                                         </div>  
                                     </fieldset>
                                 </div>                                
@@ -75,45 +74,10 @@
                     </div>
                 </div>                
             </div>
-            <div class="col-md-4">
-                <div class="row clearfix">
-                    <div class="card">
-                        <div class="body table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Fecha Inicial</th>
-                                        <th>Fecha Final</th>
-                                        <th>Tipo</th>
-                                        <th style="text-align: center">Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(item, index) in noveltys.data">
-                                        <td v-text="index+1"></td>
-                                        <td v-text="item.f_initial"></td>
-                                        <td v-text="item.f_final"></td>
-                                        <td v-text="item.type_nomina"></td>
-                                        <td style="text-align: center">
-                                            {{-- <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a> --}}
-                                            {{-- <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a> --}}
-                                            <a :href="'pdf/' + item.id"><i class="material-icons xs-3">picture_as_pdf</i></a>
-                                        </td>                                    
-                                    </tr>                        
-                                </tbody>
-                            </table>
-                            <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
-                        </div>                        
-                        
-                    </div>
-                    
-                    
-                </div>
-            </div>
+            
+            </div> 
         </div>
     </div>
-    {{-- @include('nomina.novelty.edit') --}}
 @endsection
 
 @section('footer-scripts')
@@ -128,20 +92,7 @@
             f_final:'',
             type_nomina:'',
             observation:'',
-            actualiza: true,
-            // form: new Form({
-            //     f_initial: '',
-            //     f_final:'',
-            //     type_nomina:'',
-            //     observation:''
-            // }),
-            // fillNovelty: new Form({
-            //     id: '',
-            //     f_initial: '',
-            //     f_final:'',
-            //     type_nomina:'',
-            //     observation:''
-            // }),
+            actualiza: true,            
             noveltys: {
                 total: 0,
                 per_page: 2,

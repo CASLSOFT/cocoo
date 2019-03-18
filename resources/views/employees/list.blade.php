@@ -5,13 +5,19 @@
 @endsection
 
 @section('page-header')
-    
+
 @endsection
 @section('page-content')
 <div class="col-lg-10">
     <div class="panel panel-info">
         <div class="panel-heading">
-            Lista de Empleados
+            <div class="col-md-6">
+                Lista de Empleados
+            </div>
+            <div style="text-align: right">
+                <button @click="getInactivos" type="button" class="btn bg-teal waves-effect">Inactivos</button>
+                <button @click="getActivos" type="button" class="btn bg-teal waves-effect">Activos</button>
+          </div>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -41,7 +47,7 @@
                             <td>
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">edit</i></a>
                             </td>
-                        </tr>                        
+                        </tr>
                     </tbody>
                 </table>
                 <vue-pagination  :pagination="employees" @paginate="getEmployees()" :offset="2"></vue-pagination>
@@ -90,21 +96,28 @@
                 to: 0,
                 current_page: 1
             },
-            offset: 4
+            offset: 4,
+            status: 1,
         },
         mounted() {
             this.getEmployees();
         },
         methods: {
+            getInactivos(){
+                this.status = 0;
+                this.getEmployees();
+            },
+            getActivos(){
+                this.status = 1;
+                this.getEmployees();
+            },
             getEmployees() {
-                let url = '/employees/list?page='+this.employees.current_page;
-                axios.get(url).then(response => {                        
-                        this.employees = response.data;
-                    });
-            }
-            ,
+                let url = 'employees/list/' + this.status + '?page='+this.employees.current_page;
+                axios.get(url).then(response => {
+                    this.employees = response.data;
+                });
+            },
             getEdit(item) {
-
                 this.fillEmployee.id = item.id;
                 this.fillEmployee.typecc = item.typecc;
                 this.fillEmployee.identificacion = item.identificacion;
@@ -123,15 +136,15 @@
                 $('#edit').modal('show');
             },
             getActive(id) {
-                let url = '/employee/active/'+id;
+                let url = 'employee/active/'+id;
                 axios.put(url).then(response => {
-                        this.getLibranzas();              
-                    });   
+                        this.getLibranzas();
+                    });
             },
             updateEmployee(id) {
-                let url = '/employee/'+id;
+                let url = 'employee/'+id;
                 this.fillEmployee.submit('put',url)
-                .then(response => {                    
+                .then(response => {
                     this.fillEmployee;
                     $('#edit').modal('hide');
                     toastr.success('Actualizado', 'Empleado');
@@ -141,6 +154,6 @@
             }
         }
     });
-    
+
 </script>
 @endsection

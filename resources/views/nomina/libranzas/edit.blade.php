@@ -6,14 +6,14 @@
                     <font color="white">
                         <h4 class="title">Modificar Libranza</h4>
                     </font>
-                </div>                
+                </div>
             </div>
             <div class="modal-body">
-                    <form @submit.prevent="updateLibranza(fillLibranza.id)" 
-                            @keydown="fillLibranza.errors.clear($event.target.name)" 
+                    <form @submit.prevent="updateLibranza(fillLibranza.id)"
+                            @keydown="fillLibranza.errors.clear($event.target.name)"
                             @Change="fillLibranza.errors.clear($event.target.name)">
-                        <div class="row">                        
-                            <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <p><b># Cuota Mensual</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p><b># Cuota Quincenal</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -76,19 +76,19 @@
                                 <p><b>Qincena</b></p>
                                 <div>
                                     <input type="checkbox" id="basic_checkbox_1" checked="" v-model="fillLibranza.first_quincena">
-                                    <label for="basic_checkbox_1">Primera</label>                                
+                                    <label for="basic_checkbox_1">Primera</label>
                                 </div>
                                 <span  class="label label-danger" v-if="fillLibranza.errors.has('first_quincena')" v-text="form.errors.get('first_quincena')"></span>
                             </div>
                         </div>
                         <div class="row">
-                        </div>                                    
+                        </div>
                         <button type="submit" class="btn btn-primary pull-right">Guardar</button>
                         <div class="clearfix"></div>
                     </form>
                     {{-- formulario de edición --}}
                 <div class="row">
-                </div>                
+                </div>
             </div>
         </div>
     </div>

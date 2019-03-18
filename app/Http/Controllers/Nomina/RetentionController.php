@@ -20,16 +20,16 @@ class RetentionController extends Controller
     }
 
     public function list()
-    {        
+    {
         $retentions = DB::table('employees')
                         ->join('retentions', function($join){
                             $join->on('employees.id', '=', 'retentions.employee_id');
-                        })                        
+                        })
                         ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'retentions.id', 'retentions.lapso', 'retentions.income', 'retentions.value','retentions.process')
                         ->groupBy('retentions.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'retentions.lapso', 'retentions.income', 'retentions.value', 'retentions.process')
                         ->orderBy('retentions.id', 'DES')
-                        ->paginate(2);
-        
+                        ->paginate(10);
+
         return $retentions;
     }
 

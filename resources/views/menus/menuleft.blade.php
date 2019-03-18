@@ -312,13 +312,13 @@
         </li>
         <li>
             <a href="javascript:void(0);" class="menu-toggle">
-                <i class="material-icons">trending_down</i>
-                <span>Multi Level Menu</span>
+                <i class="material-icons">settings</i>
+                <span>Configuración</span>
             </a>
             <ul class="ml-menu">
                 <li>
-                    <a href="javascript:void(0);">
-                        <span>Menu Item</span>
+                    <a href="{{ route('destination.index') }}">
+                        <span>Centros de Operación</span>
                     </a>
                 </li>
                 <li>
@@ -352,31 +352,6 @@
                 </li>
             </ul>
         </li>
-        {{-- <li>
-            <a href="pages/changelogs.html">
-                <i class="material-icons">update</i>
-                <span>Changelogs</span>
-            </a>
-        </li> --}}
-        {{-- <li class="header">LABELS</li>
-        <li>
-            <a href="javascript:void(0);">
-                <i class="material-icons col-red">donut_large</i>
-                <span>Important</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <i class="material-icons col-amber">donut_large</i>
-                <span>Warning</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <i class="material-icons col-light-blue">donut_large</i>
-                <span>Information</span>
-            </a>
-        </li> --}}
         <li>
             <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="api-base-url" content="{{ url('/') }}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    
+
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -23,12 +24,27 @@
     <!-- Waves Effect Css -->
     <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
+    <!-- Animation Css -->
+    <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="{{ asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="{{ asset('plugins/waitme/waitMe.css') }}" rel="stylesheet" />
+
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    
+    <!-- Custom Css -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
+
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"> --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 </head>
 
 <body class="theme-red">
@@ -73,10 +89,11 @@
             <div class="user-info">
                 <div class="image">
                     <img src="{{ asset('images/vendor/adminbsb-materialdesign/user-img-background.jpg') }}" width="48" height="48" alt="User" />
+
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>                    
+                    <div class="email">john.doe@example.com</div>
                 </div>
             </div>
             <!-- #User Info -->
@@ -84,7 +101,7 @@
                 @include('menus.nomina.derecho')
             <!-- #Menu -->
             <!-- Footer -->
-            
+
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
@@ -99,7 +116,7 @@
         </div>
     </section>
 
-    @include('menus.script')    
+    @include('menus.script')
     @yield('footer-scripts')
 </body>
 

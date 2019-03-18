@@ -15,34 +15,34 @@
                 <div class="header">
                     <h2>
                         CREAR EMPLEADO
-                    </h2>                    
+                    </h2>
                 </div>
                 <div class="body">
-                    <form @submit.prevent="create()" 
-                        @keydown="form.errors.clear($event.target.name)" 
+                    <form @submit.prevent="create()"
+                        @keydown="form.errors.clear($event.target.name)"
                         @Change="form.errors.clear($event.target.name)">
                         <div class="row">
 
-                            
-                            <div class="col-md-4" >                                
+
+                            <div class="col-md-4" >
                                 <label class="control-label">Tipo Identificación</label>
                                 <div style="font-size: 12px; padding-left: 25px;">
                                     <input name="group1" type="radio" id="radio_9" class="with-gap radio-col-purple" v-model="form.typecc" value="CC">
-                                    <label for="radio_9">CC</label>                                
+                                    <label for="radio_9">CC</label>
                                     <input name="group1" type="radio" id="radio_14" class="with-gap radio-col-cyan" v-model="form.typecc" value="TI">
-                                    <label for="radio_14">TI</label>                                
+                                    <label for="radio_14">TI</label>
                                     <input name="group1" type="radio" id="radio_18" class="with-gap radio-col-lime" v-model="form.typecc" value="Otro">
                                     <label for="radio_18">Otro</label>
-                                </div>                                
-                                <span  class="label label-danger" v-if="form.errors.has('typecc')" v-text="form.errors.get('typecc')"></span>                                
+                                </div>
+                                <span  class="label label-danger" v-if="form.errors.has('typecc')" v-text="form.errors.get('typecc')"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="control-label">Area</label>
                                 <div>
                                     <input name="group5" type="radio" id="radio_1" class="with-gap radio-col-orange" v-model="form.area" value="administracion">
-                                    <label for="radio_1">Administracion</label>                                
+                                    <label for="radio_1">Administracion</label>
                                     <input name="group5" type="radio" id="radio_2" class="with-gap radio-col-teal" v-model="form.area" value="comercial">
-                                    <label for="radio_2">Comercial</label>                                
+                                    <label for="radio_2">Comercial</label>
                                     <input name="group5" type="radio" id="radio_3" class="with-gap radio-col-red" v-model="form.area" value="farmacia">
                                     <label for="radio_3">Farmacia</label>
                                 </div>
@@ -56,7 +56,7 @@
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('identificacion')" v-text="form.errors.get('identificacion')"></span>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -66,7 +66,7 @@
                                         <input name="firstname" class="form-control" v-model="form.firstname">
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('firstname')" v-text="form.errors.get('firstname')"></span>
-                                </div>                            
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label >Apellidos</label>
@@ -75,8 +75,8 @@
                                         <input name="lastname" class="form-control" v-model="form.lastname">
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('lastname')" v-text="form.errors.get('lastname')"></span>
-                                </div>                            
-                            </div>                            
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -86,7 +86,7 @@
                                         <input name="position" class="form-control" v-model="form.position">
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('position')" v-text="form.errors.get('position')"></span>
-                                </div>                            
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label >Tipo de Contrato</label>
@@ -95,11 +95,11 @@
                                         <input name="contract" class="form-control" v-model="form.contract">
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('contract')" v-text="form.errors.get('contract')"></span>
-                                </div>                            
-                            </div>                            
-                        </div>                          
-                        <div class="row">                            
-                            <div class="col-md-5"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
                                 <label for="email_address">Email</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -128,10 +128,10 @@
                                     <option value="P">Oficina Principal</option>
                                     <option value="F">Farmacias</option>
                                     <option value="T">Todos</option>
-                                </select>                                
+                                </select>
                                 <span  class="label label-danger" v-if="form.errors.has('type_nomina')" v-text="form.errors.get('type_nomina')"></span>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <b>Fecha Ingreso</b>
@@ -156,7 +156,7 @@
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('retirementdate')" v-text="form.errors.get('retirementdate')"></span>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="col-md-4">
                                 <b>Salario</b>
                                 <div class="input-group">
@@ -180,10 +180,10 @@
 @section('footer-scripts')
 
 <script type="text/javascript">
-// 
+//
     var vm = new Vue({
         el: '#main',
-        data: {            
+        data: {
             form: new Form({
                 typecc:'',
                 identificacion:'',
@@ -198,10 +198,10 @@
                 admissiondate:'',
                 retirementdate:'',
                 salary:''
-            })            
+            })
         },
         methods: {
-            create(datos) {                
+            create(datos) {
                 this.form.submit('post','/employee')
                 .then(response => toastr.success('Creado con exito!', 'Empleado'))
                 .catch(error => this.form.errors.record(error.errors));

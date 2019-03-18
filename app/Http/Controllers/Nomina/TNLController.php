@@ -28,7 +28,7 @@ class TNLController extends Controller
                         ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.id', 'tnls.since', 'tnls.until', 'tnls.days', 'tnls.typeTNL')
                         ->groupBy('tnls.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.since', 'tnls.until', 'tnls.days', 'tnls.typeTNL')
                         ->orderBy('tnls.id', 'DES')
-                        ->paginate(2);
+                        ->paginate(10);
         
         return $tnls;
     }

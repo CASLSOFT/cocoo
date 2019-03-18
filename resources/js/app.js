@@ -29,6 +29,11 @@ Vue.component('VuePagination', require('./components/Pagination.vue'));
 Vue.component('VueAutocomplete', require('./components/Autocomplete.vue'));
 Vue.component('ckeditor', require('./components/Ckeditor.vue'));
 
+// if (process.env.MIX_APP_ENV === 'production') {
+//     Vue.config.devtools = false;
+//     Vue.config.debug = false;
+//     Vue.config.silent = true; 
+// }
 // const app = new Vue({
 //     el: '#main'
 // });

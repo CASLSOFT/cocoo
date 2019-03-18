@@ -7,9 +7,10 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta name="api-base-url" content="{{ url('/') }}"> --}}
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    
+
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -24,25 +25,26 @@
     <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
     <!-- Animation Css -->
-    {{-- <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" /> --}}
+    <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    {{-- <link href="{{ asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" /> --}}
+    <link href="{{ asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
 
     <!-- Wait Me Css -->
-    {{-- <link href="{{ asset('plugins/waitme/waitMe.css') }}" rel="stylesheet" /> --}}
+    <link href="{{ asset('plugins/waitme/waitMe.css') }}" rel="stylesheet" />
 
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
     <!-- Custom Css -->
-    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    {{-- <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" /> --}}
+    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"> --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 </head>
 
 <body class="theme-red">
@@ -97,14 +99,14 @@
             <!-- Menu -->
             @include('menus.menuleft')
             {{-- @if ($_SERVER["REQUEST_URI"] == "/home")
-                @include('menus.menuleft')                        
+                @include('menus.menuleft')
             @else
-                @include('layouts.nomina')                        
-            @endif  --}}          
-            
+                @include('layouts.nomina')
+            @endif  --}}
+
             <!-- #Menu -->
             <!-- Footer -->
-            
+
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->

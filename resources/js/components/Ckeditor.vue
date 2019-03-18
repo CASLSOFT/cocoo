@@ -1,6 +1,6 @@
 <template>
     <div class="ckeditor">
-      <textarea :id="id" :value="value" :name="name" rows="15"></textarea>
+      <textarea :id="id" :value="value" :name="name" rows="55"></textarea>
     </div>
 </template>
 <script>
@@ -18,7 +18,7 @@
         },
         height: {
           type: String,
-          default: '90px',
+          default: '180px',
         },
         language: {
           type: String,

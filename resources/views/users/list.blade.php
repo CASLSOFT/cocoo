@@ -87,13 +87,13 @@
         },
         methods: {
             getUsers() {
-                let url = '/users/list?page='+this.users.current_page;
+                let url = 'users/list?page='+this.users.current_page;
                 axios.get(url).then(response => {
                         this.users = response.data;
                     });
             },
             getActive(id) {
-                let url = '/users/'+id;
+                let url = 'users/'+id;
                 axios.put(url).then(response => {
                         this.getUsers();              
                     });   
@@ -109,7 +109,7 @@
                 $('#edit').modal('show');
             },
             updateUser(id) {
-                let url = '/user/'+id;
+                let url = 'user/'+id;
                 this.fillUser.submit('put',url)
                 .then(response => {                    
                     this.fillUser;
