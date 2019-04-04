@@ -190,8 +190,8 @@
                 <tr>
                     <td>{{ $item->CO }}</td>
                     <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
-                    <td>{{ $item->since }}</td>
-                    <td>{{ $item->until }}</td>
+                    <td>{!! \Carbon\Carbon::parse($item->since)->format('d-m-Y') !!}</td>
+                    <td>{!! \Carbon\Carbon::parse($item->until)->format('d-m-Y') !!}</td>
                     <td>{{ $item->days }}</td>
                     <td>{!! \Carbon\Carbon::parse($item->until)->addDay()->format('d-m-Y') !!}</td>
                 </tr>
@@ -220,6 +220,18 @@
             <th style="width: 230px">Tipo: EG: Enfermedad General LM: Licencia de Maternidad LP: Licencia de Paternidad LL: Ley de Luto S:Suspensión PNR: Permiso No Remunerado</th>
             <th >Número de días</th>
         </tr>
+        @if (count($lms) > 0)
+            @foreach ($lms as $item)
+                <tr>
+                    <td>{{ $item->CO }}</td>
+                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td>{{ $item->since }}</td>
+                    <td>{{ $item->until }}</td>
+                    <td>{{ $item->typeTNL }}</td>
+                    <td>{{ $item->days }}</td>
+                </tr>
+            @endforeach
+        @endif
         @forelse ($tnls as $item)
             <tr>
                 <td>{{ $item->CO }}</td>

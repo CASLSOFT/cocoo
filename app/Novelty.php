@@ -47,11 +47,10 @@ class Novelty extends Model
 
     public function getTNLs($fecha, $nomina)
     {
-        return DB::table('employees')
-                ->join('tnls', 'employees.id', '=', 'tnls.employee_id')
-                ->whereMonth('since', $fecha->month)
-                ->where('employees.type_nomina', $nomina)
-                ->get();
+        $tnls = TNL::select('tnls.id', 'tnls.since', 'tnls.until', 'tnls.typeTNL', 'tnls.days', 'employees.firstname',
+                    'employees.lastname', 'employees.CO', 'employees.type_nomina', 'employees.admissiondate', 'tnls.employee_id')
+                    ->join('employees', 'employees.id', '=', 'tnls.employee_id')
+                    ->Whereyear('since', date("Y"));
     }
 
     public function getHEC($fecha, $nomina)

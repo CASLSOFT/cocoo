@@ -63,12 +63,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <p><b># Cuota De:</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
                                         <input type="numeric" name="cuota_de" class="form-control text-center" v-model="fillAmortizacion.cuota_de">
                                         <span  class="label label-danger" v-if="fillAmortizacion.errors.has('cuota_de')" v-text="fillAmortizacion.errors.get('cuota_de')"></span>
+                                    </div>
+                                </div>
+                            </div><div class="col-md-2">
+                                <p><b># Cuota Hasta:</b></p>
+                                <div class="input-group input-group-md">
+                                    <div class="form-line">
+                                        <input type="numeric" name="cuota_hasta" class="form-control text-center" v-model="fillAmortizacion.cuota_hasta">
+                                        <span  class="label label-danger" v-if="fillAmortizacion.errors.has('cuota_hasta')" v-text="fillAmortizacion.errors.get('cuota_hasta')"></span>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ use App\Employee;
 use App\Holiday;
 use App\Http\Controllers\Controller;
 use App\Novelty;
+use App\TNL;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -131,6 +132,7 @@ class NoveltyController extends Controller
     {
         $novelty = Novelty::findOrFail($id);
         $holiday = new Holiday();
+        $TNL = new TNL();
         $fechainicial = Carbon::parse($novelty->f_initial);
         $fechafinal = Carbon::parse($novelty->f_final);
         $nomina = $novelty->type_nomina;
@@ -141,9 +143,10 @@ class NoveltyController extends Controller
 
         $amortizacion = $novelty->getAmortizaciones($novelty->f_initial, $novelty->f_final, $nomina);
 
-         $vacaciones = $holiday->getHolidays($fechainicial, $fechafinal, $nomina);
+        $vacaciones = $holiday->getHolidaysNovelty($novelty, $fechainicial->month);
 
-        $tnls = $novelty->getTNLs($fechainicial, $nomina);
+        $tnls = $TNL->getTNLsNovelty($novelty, $fechafinal, $fechafinal);
+        $lms = $TNL->getLMNovelty($novelty, $fechafinal, $fechafinal);
 
         $hec = $novelty->getHEC($fechainicial, $nomina);
 
@@ -152,7 +155,7 @@ class NoveltyController extends Controller
         // Consultas para llenar PDF
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('pdf.novelty', compact('ingresos', 'retiros', 'amortizacion', 'vacaciones', 'tnls', 'hec', 'retencion', 'novelty'));
+        $pdf->loadView('pdf.novelty', compact('ingresos', 'retiros', 'amortizacion', 'vacaciones', 'tnls', 'lms', 'hec', 'retencion', 'novelty'));
         $pdf->setPaper('letter');
         return $pdf->stream();
         // return $pdf->download('novedades.pdf');
@@ -163,5 +166,16 @@ class NoveltyController extends Controller
          $noveltys = Novelty::orderBy('id', 'DESC')->paginate(10);
 
         return view('nomina.novelty.list', compact('novelty'));
+    }
+
+    public function prueba($id)
+    {
+        $tnl = new TNL();
+        $novelty = Novelty::findOrFail($id);
+
+        $mes2 = Carbon::parse($novelty->f_final);
+        $mes1 = Carbon::parse($novelty->f_initial);
+
+        return $tnl->getLMNovelty($novelty, $mes1, $mes2);
     }
 }

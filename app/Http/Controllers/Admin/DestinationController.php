@@ -25,7 +25,7 @@ class DestinationController extends Controller
      */
     public function list()
     {
-        $destination = Destination::where('status', true)->paginate(2);
+        $destination = Destination::where('status', true)->paginate(5);
 
         return $destination;
     }

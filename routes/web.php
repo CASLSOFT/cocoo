@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('destination/list/{status}', 'Admin\DestinationController@list');
 
 	//novelty
+	Route::get('/nomina/novelty/prueba/{id}', 'Nomina\NoveltyController@prueba');
 	Route::get('/nomina/novelty/pdf/{id}', 'Nomina\NoveltyController@pdf')->name('novelty.pdf');
 	Route::get('/nomina/novelty/list', 'Nomina\NoveltyController@list')->name('novelty.list');
 	Route::resource('/nomina/novelty', 'Nomina\NoveltyController');

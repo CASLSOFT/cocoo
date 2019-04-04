@@ -60,7 +60,7 @@ class EmployeeController extends Controller
     public function store(Request $request, Employee $employee)
     {
         $this->validate($request, [
-            'identificacion' =>'required|min:6|numeric|unique:employees,identificacion',
+            'identificacion' =>'required|min:6|numeric',
             'typecc'         =>'required|in:CC,TI,Otro',
             'firstname'      =>'required|min:3',
             'lastname'       =>'required|min:3',

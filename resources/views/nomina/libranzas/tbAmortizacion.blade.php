@@ -135,6 +135,7 @@
                 cuota_mensual:'',
                 cuota_quincenal:'',
                 cuota_de:'',
+                cuota_hasta:'',
                 entidad:'',
                 category:[]
             }),
@@ -156,6 +157,7 @@
                 this.fillAmortizacion.cuota_mensual  = '';
                 this.fillAmortizacion.cuota_quincenal  = '';
                 this.fillAmortizacion.cuota_de = '';
+                this.fillAmortizacion.cuota_hasta = '';
             },
             showEmployee(id){
                 this.limpiar();
@@ -183,6 +185,7 @@
                 this.fillAmortizacion.cuota_mensual  = item.cuota_mensual;
                 this.fillAmortizacion.cuota_quincenal  = item.cuota_quincenal;
                 this.fillAmortizacion.cuota_de = item.cuota_de;
+                this.fillAmortizacion.cuota_hasta = item.cuota_hasta;
                 this.fillAmortizacion.entidad = item.entidad;
                 this.fillAmortizacion.category = item.category;
                 $('#edit').modal('show');

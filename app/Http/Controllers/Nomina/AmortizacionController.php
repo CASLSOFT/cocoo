@@ -23,6 +23,7 @@ class AmortizacionController extends Controller
             'cuota_mensual'   => 'required|numeric',
             'cuota_quincenal' => 'numeric',
             'cuota_de'        => 'numeric',
+            'cuota_hasta'        => 'numeric',
             'category'   => 'required',
             'entidad'   => 'required',
         ]);
@@ -34,6 +35,7 @@ class AmortizacionController extends Controller
         $amortizacion->cuota_mensual = $request->cuota_mensual;
         $amortizacion->cuota_quincenal = $request->cuota_quincenal;
         $amortizacion->cuota_de = $request->cuota_de;
+        $amortizacion->cuota_hasta = $request->cuota_hasta;
         $amortizacion->entidad = $request->entidad;
         $amortizacion->category = $request->category;
 
