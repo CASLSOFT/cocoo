@@ -360,5 +360,21 @@
             {!! $novelty->observation !!}
         </p>
     </div>
+    {{-- <br>
+    <div style="text-align:left; page-break-before: auto; border: 1px solid black; background-color: #D3D3D3;">
+        Resumen
+    </div>
+    <div>
+        <span>Libranza: </span>
+        <span>30000</span>
+    </div>
+    <div>
+        <span>Embargos: </span>
+        <span>20000</span>
+    </div>
+    <div>
+        <span>Descuentos: </span>
+        <span>10000</span>
+    </div> --}}
 </body>
 </html>

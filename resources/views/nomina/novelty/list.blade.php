@@ -35,11 +35,14 @@
                             <td v-text="item.f_final"></td>
                             <td v-text="item.type_nomina"></td>
                             <td style="text-align: center">
-                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">mode_edit</i></a>
-                                <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons">delete</i></a>
-                                <a :href="'pdf/' + item.id"><i class="material-icons xs-3">picture_as_pdf</i></a>
-                            </td>                                    
-                        </tr>                      
+                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser" title="Modificar Registro">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                                <a href="#" @click.prevent="getDelete(item.id)" title="Eliminar Registro"><i class="material-icons">delete</i></a>
+                                <a :href="'pdf/' + item.id" target=”_blank” title="Exportar a PDF"><i class="material-icons xs-3">picture_as_pdf</i></a>
+                                <a :href="'excel/' + item.id" title="Exportar a Excel"><i class="material-icons xs-3">file_copy</i></a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
@@ -58,11 +61,11 @@
 
 @section('footer-scripts')
 <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script>    
+<script>
 
     var vm = new Vue({
         el: '#main',
-        data: {            
+        data: {
             form: new Form({
                 f_initial: '',
                 f_final:'',
@@ -83,11 +86,11 @@
                 to: 0,
                 current_page: 1
             },
-            offset: 4 
+            offset: 4
         },
         mounted() {
             this.getNoveltys();
-        },        
+        },
         methods: {
             create(datos) {
                 this.form.submit('post','/nomina/novelty')
@@ -105,21 +108,21 @@
             },
             getNoveltys() {
                 let url = '/nomina/novelty?page='+this.noveltys.current_page;
-                axios.get(url).then(response => {                        
+                axios.get(url).then(response => {
                         this.noveltys = response.data;
                     });
-            },            
+            },
             getEdit(item) {
                 this.fillNovelty.id = item.id;
                 this.fillNovelty.f_initial = item.f_initial;
                 this.fillNovelty.f_final = item.f_final;
                 this.fillNovelty.observation = item.observation;
                 this.fillNovelty.type_nomina = item.type_nomina;
-                
+
                 $('#edit').modal('show');
             },
             updateNovelty(id) {
-                
+
                 let url = '/nomina/novelty/'+id;
 
                 axios.put(url, {

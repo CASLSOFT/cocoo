@@ -59,6 +59,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request, Employee $employee)
     {
+
         $this->validate($request, [
             'identificacion' =>'required|min:6|numeric',
             'typecc'         =>'required|in:CC,TI,Otro',
@@ -66,7 +67,7 @@ class EmployeeController extends Controller
             'lastname'       =>'required|min:3',
             'position'      =>'required|min:3',
             'contract'       =>'required|min:3',
-            'email'          =>'required|unique:employees,email',
+            'email'          =>'required|email',
             'area'           =>'required|in:administracion,comercial,farmacia',
             'CO'             => 'required',
             'type_nomina'   => 'required|in:P,F,T',
@@ -102,13 +103,13 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'identificacion' =>'required|min:6|numeric|unique:employees,identificacion,' . $id,
+            'identificacion' =>'required|min:6|numeric',
             'typecc'         =>'required|in:CC,TI,Otro',
             'firstname'      =>'required|min:3',
             'lastname'       =>'required|min:3',
             'position'      =>'required|min:3',
             'contract'       =>'required|min:3',
-            'email'          =>'required|unique:employees,email,' . $id,
+            'email'          =>'required|email',
             'area'           =>'required|in:administracion,comercial,farmacia',
             'CO'             =>'required',
             'type_nomina'   => 'required|in:P,F,T',

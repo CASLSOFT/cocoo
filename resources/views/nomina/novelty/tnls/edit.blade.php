@@ -1,20 +1,20 @@
 <div class="modal fabe" id="edit">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="panel-heading" style="background-color:#CD5DDD;">
                     <font color="white">
                         <h4 class="title">Modificar Vacaciones</h4>
                     </font>
-                </div>                
+                </div>
             </div>
             <div class="modal-body">
                 <div class="panel-body">
                     {{-- formulario de edición --}}
-                    <form @submit.prevent="updateTNLs(fillTNL.id)" 
-                            @keydown="fillTNL.errors.clear($event.target.name)" 
+                    <form @submit.prevent="updateTNLs(fillTNL.id)"
+                            @keydown="fillTNL.errors.clear($event.target.name)"
                             @Change="fillTNL.errors.clear($event.target.name)">
-                        <div class="row">                        
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Fecha Inicial</label>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="form-group label-floating">
                                     {{-- crear una tabla con estos campos --}}
                                     <label class="control-label">Tipo de TNL</label>
@@ -47,17 +47,26 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="input-group input-group-lg">
+                                    <div class="form-line">
+                                        <label class="control-label">Valor</label>
+                                        <input type="numeric" name="value" class="form-control" v-model="fillTNL.value" style="text-align: center">
+                                        <span  class="label label-danger" v-if="fillTNL.errors.has('value')" v-text="fillTNL.errors.get('value')"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Días Disfrutados</label>
                                     <input type="numeric" name="days" class="form-control" v-model="fillTNL.days">
+                                    <span  class="label label-danger" v-if="fillTNL.errors.has('days')" v-text="fillTNL.errors.get('days')"></span>
                                 </div>
-                                <span  class="label label-danger" v-if="fillTNL.errors.has('days')" v-text="fillTNL.errors.get('days')"></span>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary pull-right">Guardar</button>
                         <div class="clearfix"></div>
                     </form>
-                </div>                
+                </div>
             </div>
         </div>
     </div>

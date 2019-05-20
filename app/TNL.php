@@ -13,7 +13,7 @@ class TNL extends Model
      *
      * @var array
      */
-    protected $fillable = ['since', 'until', 'days','employee_id', 'typeTNL'];
+    protected $fillable = ['since', 'until', 'value', 'days','employee_id', 'typeTNL'];
 
     public function employee()
     {

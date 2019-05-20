@@ -20,16 +20,16 @@ class TNLController extends Controller
     }
 
     public function list()
-    {        
+    {
         $tnls = DB::table('employees')
                         ->join('tnls', function($join){
                             $join->on('employees.id', '=', 'tnls.employee_id');
-                        })                        
-                        ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.id', 'tnls.since', 'tnls.until', 'tnls.days', 'tnls.typeTNL')
-                        ->groupBy('tnls.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.since', 'tnls.until', 'tnls.days', 'tnls.typeTNL')
+                        })
+                        ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.id', 'tnls.since', 'tnls.until', 'tnls.value', 'tnls.days', 'tnls.typeTNL')
+                        ->groupBy('tnls.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'tnls.since', 'tnls.until', 'tnls.value', 'tnls.days', 'tnls.typeTNL')
                         ->orderBy('tnls.id', 'DES')
                         ->paginate(10);
-        
+
         return $tnls;
     }
 
@@ -54,6 +54,7 @@ class TNLController extends Controller
         $this->validate($request, [
                 'since'       => 'required|date',
                 'until'       => 'required|date',
+                'value'        => 'required|numeric',
                 'days'        => 'required|numeric',
                 'typeTNL'     => 'required',
                 'employee_id' => 'required|numeric'
@@ -98,8 +99,9 @@ class TNLController extends Controller
         $this->validate($request, [
                 'since'       => 'required|date',
                 'until'       => 'required|date',
+                'value'        => 'required|numeric',
                 'days'        => 'required|numeric',
-                'typeTNL'     => 'required'                
+                'typeTNL'     => 'required'
             ]);
 
         $tnl->update($request->all());

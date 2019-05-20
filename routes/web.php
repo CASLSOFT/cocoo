@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function(){
 	//novelty
 	Route::get('/nomina/novelty/prueba/{id}', 'Nomina\NoveltyController@prueba');
 	Route::get('/nomina/novelty/pdf/{id}', 'Nomina\NoveltyController@pdf')->name('novelty.pdf');
+	Route::get('/nomina/novelty/excel/{id}', 'Nomina\NoveltyController@excel')->name('novelty.excel');
 	Route::get('/nomina/novelty/list', 'Nomina\NoveltyController@list')->name('novelty.list');
 	Route::resource('/nomina/novelty', 'Nomina\NoveltyController');
 	//Libranzas

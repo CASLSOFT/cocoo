@@ -19,6 +19,7 @@ class CreateTNLsTable extends Migration
             $table->date('until');
             $table->string('typeTNL');
             $table->integer('days')->unsigned();
+            $table->integer('value')->unsigned();
             $table->integer('employee_id')->unsigned();
             $table->timestamps();
 

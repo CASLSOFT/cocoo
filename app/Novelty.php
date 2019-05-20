@@ -64,10 +64,13 @@ class Novelty extends Model
 
     public function getRetention($fecha, $nomina)
     {
-        return DB::table('employees')
-                ->join('retentions', 'employees.id', '=', 'retentions.employee_id')
-                ->whereMonth('lapso', $fecha->month)
-                ->where('employees.type_nomina', $nomina)
-                ->get();
+        if ($fecha->day == 16) {
+            return DB::table('employees')
+                    ->join('retentions', 'employees.id', '=', 'retentions.employee_id')
+                    ->whereMonth('lapso', $fecha->month)
+                    ->where('employees.type_nomina', $nomina)
+                    ->get();
+        }
+        return [];
     }
 }

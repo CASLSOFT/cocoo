@@ -22,7 +22,7 @@ class CreateEmployeesTable extends Migration
             $table->String('lastname', 100);
             $table->String('position', 100);
             $table->String('contract', 100);
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('CO', 3);
             $table->string('type_nomina', 1)->nullable();
             $table->date('admissiondate');
