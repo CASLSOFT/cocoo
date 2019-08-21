@@ -38,4 +38,5 @@
 {{-- <script src="{{ asset('js/pages/index.js') }}"></script> --}}
 
 <!-- Demo Js -->
+<script src="{{ asset('js/demo.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>

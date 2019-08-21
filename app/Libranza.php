@@ -12,7 +12,8 @@ class Libranza extends Model
      * @var array
      */
     protected $fillable = [
-        'cuota_mensual', 'cuota_quincenal', 'cuota_de', 'cuota_hasta', 'entidad', 'status', 'category', 'employee_id', 'first_quincena'
+        'cuota_mensual', 'cuota_quincenal', 'cuota_de', 'cuota_hasta', 'entidad',
+         'status', 'category', 'employee_id', 'first_quincena', 'startdate'
     ];
 
     public function employee()

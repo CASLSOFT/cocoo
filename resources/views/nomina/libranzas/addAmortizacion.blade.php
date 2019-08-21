@@ -9,6 +9,7 @@
 @endsection
 @section('page-content')
 <div class="col-lg-10">
+    @can('amortizacion.addtbamortizacion')
     <div class="card">
         <div class="header text-white bg-green">
             <font>
@@ -115,6 +116,7 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 

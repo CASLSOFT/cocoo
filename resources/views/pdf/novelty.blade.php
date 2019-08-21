@@ -19,8 +19,8 @@
           </tr>
           <tr>
             <td>FO-400-59</td>
-            <td>2</td>
-            <td>16/11/2017</td>
+            <td>3</td>
+            <td>27/05/2019</td>
           </tr>
         </table>
         <table style="margin-top: 3px;">
@@ -52,7 +52,7 @@
         @foreach ($ingresos as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
-                <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                 <td>{{ $item->admissiondate }}</td>
                 <td></td>
                 <td class="textmayusc">{{ $item->position }}</td>
@@ -63,7 +63,7 @@
         @forelse ($retiros as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
-                <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                 <td></td>
                 <td>{{ $item->retirementdate }}</td>
                 <td class="textmayusc">{{ $item->position }}</td>
@@ -101,7 +101,7 @@
             @if ($item->category == 'LIBRANZA')
                 <tr>
                     <td>{{ $item->CO }}</td>
-                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                     <td>{{ number_format($item->cuota_mensual, 0, ".", ",") }}</td>
                     <td>{{ number_format($item->cuota_quincenal, 0, ".", ",") }}</td>
                     <td>{{ $item->cuota_de }}</td>
@@ -141,7 +141,7 @@
                 @if ($item->category == 'DESCUENTO')
                     <tr>
                         <td>{{ $item->CO }}</td>
-                        <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                        <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                         <td>{{ number_format($item->cuota_mensual, 0, ".", ",") }}</td>
                         <td>{{ number_format($item->cuota_quincenal, 0, ".", ",") }}</td>
                         <td>{{ $item->cuota_de }}</td>
@@ -189,7 +189,7 @@
             @forelse ($vacaciones as $item)
                 <tr>
                     <td>{{ $item->CO }}</td>
-                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                     <td>{!! \Carbon\Carbon::parse($item->since)->format('d-m-Y') !!}</td>
                     <td>{!! \Carbon\Carbon::parse($item->until)->format('d-m-Y') !!}</td>
                     <td>{{ $item->days }}</td>
@@ -224,7 +224,7 @@
             @foreach ($lms as $item)
                 <tr>
                     <td>{{ $item->CO }}</td>
-                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                     <td>{{ $item->since }}</td>
                     <td>{{ $item->until }}</td>
                     <td>{{ $item->typeTNL }}</td>
@@ -235,7 +235,7 @@
         @forelse ($tnls as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
-                <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                 <td>{{ $item->since }}</td>
                 <td>{{ $item->until }}</td>
                 <td>{{ $item->typeTNL }}</td>
@@ -268,8 +268,15 @@
         @forelse ($hec as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
-                <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
-                <td>{{ $item->lapso }}</td>
+                <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
+                <td>
+                    @php
+                        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                        $fecha = \Carbon\Carbon::parse($item->lapso)->subMonth();
+                        // $mes = $meses[($fecha->format('n')) - 1];
+                        ($item->typeHE == 'CPV' || $item->typeHE == 'CPR') ? printf($meses[($fecha->format('n')) - 1]) : printf($item->lapso);
+                    @endphp
+                </td>
                 <td>{{ number_format($item->value, 0, ".", ",") }}</td>
                 <td>{{ $item->typeHE }}</td>
             </tr>
@@ -299,7 +306,7 @@
         @forelse ($retencion as $item)
             <tr>
                 <td>{{ $item->CO }}</td>
-                <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                 <td>{{ number_format($item->income, 0, ".", ",") }}</td>
                 <td>{{ number_format($item->value, 0, ".", ",") }}</td>
                 <td>{{ $item->process }}</td>
@@ -332,7 +339,7 @@
             @if ($item->category == 'EMBARGO')
                 <tr>
                     <td>{{ $item->CO }}</td>
-                    <td class="textleft textmayusc">{{ $item->firstname }} {{ $item->lastname }}</td>
+                    <td class="textleft textmayusc">{{ $item->lastname }} {{ $item->firstname }}</td>
                     <td>{{ number_format($item->cuota_mensual, 0, ".", ",") }}</td>
                     <td>{{ number_format($item->cuota_quincenal, 0, ".", ",") }}</td>
                     <td>{{ number_format($item->cuota_mensual + $item->cuota_quincenal, 0, ".", ",") }}</td>
@@ -360,21 +367,5 @@
             {!! $novelty->observation !!}
         </p>
     </div>
-    {{-- <br>
-    <div style="text-align:left; page-break-before: auto; border: 1px solid black; background-color: #D3D3D3;">
-        Resumen
-    </div>
-    <div>
-        <span>Libranza: </span>
-        <span>30000</span>
-    </div>
-    <div>
-        <span>Embargos: </span>
-        <span>20000</span>
-    </div>
-    <div>
-        <span>Descuentos: </span>
-        <span>10000</span>
-    </div> --}}
 </body>
 </html>

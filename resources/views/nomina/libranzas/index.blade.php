@@ -9,6 +9,7 @@
 @endsection
 @section('page-content')
 <div class="col-lg-10">
+    @can('libranza.create')
     <div class="card">
         <div class="header text-white bg-green">
             <font>
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p><b>Entidad Recaudadora</b></p>
                             <div class="input-group input-group-lg">
                                 <div class="form-line">
@@ -83,15 +84,28 @@
                                 <span  class="label label-danger" v-if="form.errors.has('entidad')" v-text="form.errors.get('entidad')"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <p><b>Categoria</b></p>
-                            <select class="form-control" v-model="form.category" name="category">
-                                {{-- <option value="">Seleccione</option> --}}
-                                <option value="LIBRANZA">Libranza</option>
-                                <option value="DESCUENTO">Descuento Voluntario</option>
-                                <option value="EMBARGO">Embargo</option>
-                            </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p><b>Categoria</b></p>
+                                    <select class="form-control" v-model="form.category" name="category">
+                                        <option value="">Seleccione</option>
+                                        <option value="LIBRANZA">Libranza</option>
+                                        <option value="DESCUENTO">Descuento Voluntario</option>
+                                        <option value="EMBARGO">Embargo</option>
+                                    </select>
+                                </div>
+                            </div>
                             <span  class="label label-danger" v-if="form.errors.has('category')" v-text="form.errors.get('category')"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <p><b>Fecha Inicio:</b></p>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="date" name="startdate" class="form-control" v-model="form.startdate">
+                                </div>
+                                <span  class="label label-danger" v-if="form.errors.has('startdate')" v-text="form.errors.get('startdate')"></span>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <p><b>Qincena</b></p>
@@ -109,6 +123,7 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 
@@ -130,7 +145,8 @@
                 cuota_hasta:'',
                 entidad:'',
                 first_quincena:false,
-                category:''
+                category:'',
+                startdate:''
             })
         },
         mounted() {

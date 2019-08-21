@@ -27,12 +27,17 @@ window.toastr = require('toastr');
 
 Vue.component('VuePagination', require('./components/Pagination.vue'));
 Vue.component('VueAutocomplete', require('./components/Autocomplete.vue'));
+Vue.component('VueSearchrole', require('./components/Searchrole.vue'));
+Vue.component('VueSearchuser', require('./components/Searchuser.vue'));
+Vue.component('VueSearcharticle', require('./components/SearchArticles.vue'));
+Vue.component('VueOrdersdraft', require('./components/Ordersdraft.vue'));
 Vue.component('ckeditor', require('./components/Ckeditor.vue'));
+Vue.component('VueAddarticleorder', require('./components/Addarticleorder.vue'));
 
 // if (process.env.MIX_APP_ENV === 'production') {
 //     Vue.config.devtools = false;
 //     Vue.config.debug = false;
-//     Vue.config.silent = true; 
+//     Vue.config.silent = true;
 // }
 // const app = new Vue({
 //     el: '#main'

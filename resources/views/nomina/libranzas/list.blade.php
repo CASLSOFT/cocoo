@@ -17,10 +17,13 @@
             <div style="text-align: right">
                 <button @click="getInactivas" type="button" class="btn bg-teal waves-effect">Inactivas</button>
                 <button @click="getActivas" type="button" class="btn bg-teal waves-effect">Activas</button>
+                @can('libranza.amortizar')
                 <button @click="getAmortizar" type="button" class="btn bg-teal waves-effect">Amortizar</button>
+                @endcan
           </div>
         </div>
         <!-- /.panel-heading -->
+        @can('libranza.list')
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table">
@@ -52,13 +55,15 @@
                             <td v-text="item.category"></td>
                             <td v-text="item.first_quincena == 1 ? 'S' : 'N'"></td>
                             <td>
-                                {{-- <a href="#" :class="item.status == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"
-                                @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a> --}}
+                                @can('libranza.active')
                                 <a href="#" @click="getActive(item.id)" alt="Activar o Inactivar Usuario">
                                     <i v-if="item.state" class="material-icons">check</i>
                                     <i v-else class="material-icons">remove_circle_outline</i>
                                 </a>
+                                @endcan
+                                @can('libranza.edit')
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#Modal"><i class="material-icons">edit</i></a>
+                                @endcan
                             </td>
                         </tr>
                     </tbody>
@@ -67,15 +72,19 @@
             </div>
             <!-- /.table-responsive -->
         </div>
+        @endcan
         <!-- /.panel-body -->
     </div>
     <!-- /.panel -->
 </div>
+
 <div class="col-md-3">
+    @can('libranza.amortizar')
     <h4>Ultimas Amortizaciones</h4>
     <div class="list-group">
       <a href="#" class="list-group-item list-group-item-action" v-for="item in amortizaciones" >@{{ item.fecha_inic }} Hasta @{{ item.fecha_final }}</a>
     </div>
+    @endcan
 </div>
 
 <!-- Modal -->
@@ -102,6 +111,7 @@
                 cuota_hasta:'',
                 entidad:'',
                 category:'',
+                startdate:'',
                 first_quincena: false
             }),
             libranzas: {
@@ -139,7 +149,7 @@
                     });
             },
             getAmortizaciones(){
-                let url = '/nomina/amortizaciones';
+                let url = '/nomina/tbamortizaciones';
                 axios.get(url).then(response => {
                         this.amortizaciones = response.data;
                     });

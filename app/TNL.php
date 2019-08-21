@@ -30,8 +30,8 @@ class TNL extends Model
 
     public function getTNLsNovelty($novelty, $f_inicial, $f_final)
     {
-        $tnl = $this->getTNLsYear();       //instnaciamos la consulta de los TNL sin incluir las licencias de maternidad
-
+        $tnl = $this->getTNLsYear();
+        //instnaciamos la consulta de los TNL sin incluir las licencias de maternidad
         if ($f_final->day === 15 && $f_final->month === 1) {
             $tnl = $tnl->whereMonth('since', '12')
                     ->orwhere('until', '<=', $f_final)
@@ -39,9 +39,10 @@ class TNL extends Model
                     ->where('typeTNL', '<>', 'LM')
                     ->get();
         } elseif($f_final->day === 15) {
-            $tnl = $tnl->whereMonth('since', $f_final->month)->where('until', '<=', $f_final)->where('typeTNL', '<>', 'LM')->get();
+            $tnl = $tnl->whereBetween('since', [$f_inicial, $f_inicial])->orWheremonth('until', $f_final->month)->where('typeTNL', '<>', 'LM')->get();
+            // $tnl = $tnl->whereBetween('since', [$f_inicial, $f_final])->where('typeTNL', '<>', 'LM')->get();
         } else {
-            $tnl = $tnl->whereMonth('since', $f_final)->where('until', '<=', $f_final)->where('typeTNL', '<>', 'LM')->get();
+            $tnl = $tnl->whereMonth('since', $f_final)->orWheremonth('until', $f_final->month)->where('typeTNL', '<>', 'LM')->get();
         }
 
         $tnlsNovelty = $tnl->filter(function($item) use ($novelty) {
@@ -56,8 +57,9 @@ class TNL extends Model
         $lm = $this->getTNLsYear();       //instnaciamos la consulta de los TNL
 
         $lm = $lm->where('typeTNL', 'LM')->orwhereyear('since', date("Y") - 1)->get();
-
+        $result = $lm;
         foreach ($lm as $key => $value) {
+            //separamos la fecha 2019-06-15 en year = 2019, month = 06, day = 15
             list($year, $month, $day) = explode('-', $value['until']);
 
             if ($value['since'] <= $f_inicial->format('Y-m-d') && $year == $f_final->year && $month >= $f_final->month && $value['type_nomina'] == $novelty->type_nomina) {

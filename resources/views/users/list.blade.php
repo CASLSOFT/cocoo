@@ -5,10 +5,11 @@
 @endsection
 
 @section('page-header')
-    
+
 @endsection
 @section('page-content')
 <div class="col-lg-10">
+    @can('user.list')
     <div class="panel panel-info">
         <div class="panel-heading">
             Lista de Usuarios
@@ -35,11 +36,14 @@
                             <td v-text="item.email"></td>
                             <td v-text="item.area"></td>
                             <td>
-                                <a href="#" :class="item.state == 1 ? 'glyphicon glyphicon-thumbs-up' : 'glyphicon glyphicon-thumbs-down'" 
-                                @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a>
+                                @can('user.active')
+                                <a href="#" :class="item.state == 1 ? 'glyphicon glyphicon-thumbs-up' : 'glyphicon glyphicon-thumbs-down'" @click="getActive(item.id)" alt="Activar o Inactivar Usuario"></a>
+                                @endcan
+                                @can('user.edit')
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">edit</i></a>
+                                @endcan
                             </td>
-                        </tr>                        
+                        </tr>
                     </tbody>
                 </table>
                 <vue-pagination  :pagination="users" @paginate="getUsers()" :offset="2"></vue-pagination>
@@ -48,6 +52,7 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 
@@ -95,10 +100,10 @@
             getActive(id) {
                 let url = 'users/'+id;
                 axios.put(url).then(response => {
-                        this.getUsers();              
-                    });   
+                        this.getUsers();
+                    });
             },
-            getEdit(item) {                
+            getEdit(item) {
                 this.fillUser.id = item.id;
                 this.fillUser.firstname = item.firstname;
                 this.fillUser.lastname = item.lastname;
@@ -111,7 +116,7 @@
             updateUser(id) {
                 let url = 'user/'+id;
                 this.fillUser.submit('put',url)
-                .then(response => {                    
+                .then(response => {
                     this.fillUser;
                     $('#edit').modal('hide');
                     toastr.success('Actualizado', 'Usuario');
@@ -123,6 +128,6 @@
 
         }
     });
-    
+
 </script>
 @endsection

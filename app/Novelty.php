@@ -41,36 +41,33 @@ class Novelty extends Model
                 ->where('fecha_final', '<=', $fecha_final)
                 ->where('employees.type_nomina', $nomina)
                 ->orderBy('Amortizacion_libranzas.entidad')
-                ->orderBy('Employees.firstname')
+                ->orderBy('Employees.lastname')
                 ->get();
     }
 
-    public function getTNLs($fecha, $nomina)
-    {
-        $tnls = TNL::select('tnls.id', 'tnls.since', 'tnls.until', 'tnls.typeTNL', 'tnls.days', 'employees.firstname',
-                    'employees.lastname', 'employees.CO', 'employees.type_nomina', 'employees.admissiondate', 'tnls.employee_id')
-                    ->join('employees', 'employees.id', '=', 'tnls.employee_id')
-                    ->Whereyear('since', date("Y"));
-    }
+    // public function getTNLs($fecha, $nomina)
+    // {
+    //     $tnls = TNL::select('tnls.id', 'tnls.since', 'tnls.until', 'tnls.typeTNL', 'tnls.days', 'employees.firstname',
+    //                 'employees.lastname', 'employees.CO', 'employees.type_nomina', 'employees.admissiondate', 'tnls.employee_id')
+    //                 ->join('employees', 'employees.id', '=', 'tnls.employee_id')
+    //                 ->Whereyear('since', date("Y"));
+    // }
 
-    public function getHEC($fecha, $nomina)
+    public function getHEC($fechainicial, $fechafinal, $nomina)
     {
         return DB::table('employees')
                 ->join('hes', 'employees.id', '=', 'hes.employee_id')
-                ->whereMonth('lapso', $fecha->month)
+                ->whereBetween('lapso', [$fechainicial, $fechafinal])
                 ->where('employees.type_nomina', $nomina)
                 ->get();
     }
 
-    public function getRetention($fecha, $nomina)
+    public function getRetention($fechainicial, $fechafinal, $nomina)
     {
-        if ($fecha->day == 16) {
-            return DB::table('employees')
-                    ->join('retentions', 'employees.id', '=', 'retentions.employee_id')
-                    ->whereMonth('lapso', $fecha->month)
-                    ->where('employees.type_nomina', $nomina)
-                    ->get();
-        }
-        return [];
+        return DB::table('employees')
+                ->join('retentions', 'employees.id', '=', 'retentions.employee_id')
+                ->whereBetween('lapso', [$fechainicial, $fechafinal])
+                ->where('employees.type_nomina', $nomina)
+                ->get();
     }
 }

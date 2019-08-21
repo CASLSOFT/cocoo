@@ -1,13 +1,11 @@
 @extends('layouts.AdminBSB')
 
 @section('title')
-    Perfil
+    Crear Usuario
 @endsection
 
-{{-- @section('page-header')
-    Crear Usuario
-@endsection --}}
 @section('page-content')
+@can('user.create')
 <div id="form-user">
     <div class="container-fluid">
         <div class="row">
@@ -20,7 +18,7 @@
                         </font>
                     </div>
                     <div class="panel-body">
-                        <form @submit.prevent="createUser()" 
+                        <form @submit.prevent="createUser()"
                         @keydown="form.errors.clear($event.target.name)"
                         @Change="form.errors.clear($event.target.name)">
                             <div class="row">
@@ -43,17 +41,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">                                
+                            <div class="row">
                                 <div class="col-md-12">
                                     <label class="control-label">Email</label>
                                     <div class="form-group">
-                                        <div class="form-line">                                            
+                                        <div class="form-line">
                                             <input type="email" id="email" name="email" class="form-control" v-model='form.email'>
                                         </div>
                                         <span  class="label label-danger" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <label class="control-label">Username</label>
@@ -72,41 +70,38 @@
                                         <option value="comercial">Comercial</option>
                                         <option value="farmacia">Farmacia</option>
                                     </select>
-                                    <span  class="label label-danger" v-if="form.errors.has('area')" v-text="form.errors.get('area')"></span>                                    
+                                    <span  class="label label-danger" v-if="form.errors.has('area')" v-text="form.errors.get('area')"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="control-label">Estado</label>
                                     <div >
                                         <input name="group1" type="radio" id="radio_9" class="with-gap radio-col-purple" v-model="form.state" value="0">
-                                        <label for="radio_9">Inactivo</label>                                
+                                        <label for="radio_9">Inactivo</label>
                                         <input name="group1" type="radio" id="radio_14" class="with-gap radio-col-cyan" v-model="form.state" value="1">
                                         <label for="radio_14">Activo</label>
-                                        <span  class="label label-danger" v-if="form.errors.has('state')" v-text="form.errors.get('state')"></span>                                        
+                                        <span  class="label label-danger" v-if="form.errors.has('state')" v-text="form.errors.get('state')"></span>
                                     </div>
-                                </div>                                
-                            </div>                            
+                                </div>
+                            </div>
                             <button class="btn btn-primary pull-right" :disabled="form.errors.any()">Guardar</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                
-            </div>
         </div>
     </div>
-    
 </div>
+@endcan
 @endsection
 
 @section('footer-scripts')
 
 <script type="text/javascript">
-// 
+//
     var vm = new Vue({
         el: '#main',
-        data: {            
+        data: {
             form: new Form({
                 firstname:'',
                 lastname:'',
@@ -114,16 +109,16 @@
                 email:'',
                 area:'',
                 state:''
-            })            
+            })
         },
         methods: {
             createUser(datos) {
-                this.form.submit('post','user')
+                this.form.submit('post','/user')
                 .then(response => toastr.success('Creado con exito!', 'Usuario'))
                 .catch(error => this.form.errors.record(error.response.data));
             }
         }
     });
-    
+
 </script>
 @endsection

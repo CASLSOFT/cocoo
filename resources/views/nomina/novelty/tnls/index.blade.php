@@ -9,6 +9,7 @@
 @endsection
 @section('page-content')
 <div class="col-md-10">
+    @can('tnl.create')
     <div class="card">
         <div class="header text-white bg-green">
             <font>
@@ -102,11 +103,13 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 
 {{-- Tabla --}}
 <div class="col-lg-10">
+    @can('tnl.list')
     <div class="panel panel-info">
         <div class="panel-heading">
             Listado de TNL
@@ -139,8 +142,12 @@
                             <td v-text="item.value" style="text-align: center"></td>
                             <td v-text="item.days" style="text-align: center"></td>
                             <td style="text-align: center">
+                                @can('tnl.edit')
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">edit</i></a>
+                                @endcan
+                                @can('tnl.destroy')
                                 <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons col-red">delete</i></a>
+                                @endcan
                             </td>
                         </tr>
                     </tbody>
@@ -151,12 +158,14 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 
 <!-- Modal -->
-
+@can('tnl.edit')
 @include('nomina.novelty.tnls.edit')
+@endcan
 
 @endsection
 
@@ -252,6 +261,7 @@
                 axios.delete(url).then(response => {
                         this.getTNLs();
                         toastr.warning('Eliminado', 'TNL');
+                        this.getTNLs();
                     });
             },
         }

@@ -17,7 +17,7 @@
 </template>
 <script>
   export default{
-      props: {
+    props: {
       pagination: {
           type: Object,
           required: true

@@ -3,7 +3,7 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="index.html">COCOO</a>
+            <a class="navbar-brand" href="{{ route('home') }}">COCOO</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -204,9 +204,9 @@
                         <i class="material-icons">account_circle</i><i class="material-icons">more_vert</i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{ route('nomina') }}"><i class="fa fa-money fa-fw"></i> Nomina</a>
+                        <li><a href="{{ route('requisiciones') }}"><i class="fa fa-user fa-fw"></i> Requisiciones</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="{{ route('nomina') }}"><i class="fa fa-money fa-fw"></i> Nomina</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>

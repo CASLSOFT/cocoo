@@ -10,6 +10,7 @@
 
 @section('page-content')
     <div class="row clearfix">
+        @can('employee.create')
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
             <div class="card">
                 <div class="header">
@@ -118,6 +119,8 @@
                                     <option value="018">FARMACIA LORICA</option>
                                     <option value="024">FARMACIA MONTELIBANO</option>
                                     <option value="026">FARMACIA AMPAROS</option>
+                                    <option value="028">FARMACIA PLANETA RICA</option>
+                                    <option value="030">FARMACIA SAN ANTERO</option>
                                 </select>
                                 <span  class="label label-danger" v-if="form.errors.has('CO')" v-text="form.errors.get('CO')"></span>
                             </div>
@@ -162,7 +165,8 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
                                     <div class="form-line">
-                                        <input type="text" class="form-control date" name="salary" v-model="form.salary">
+                                        <input class="form-control date" name="salary" align="right"
+                                        style="text-align:right;" v-model="form.salary">
                                     </div>
                                     <span  class="label label-danger" v-if="form.errors.has('salary')" v-text="form.errors.get('salary')"></span>
                                     <span class="input-group-addon" >.00</span>
@@ -174,6 +178,7 @@
                 </div>
             </div>
         </div>
+        @endcan
     </div>
 @endsection
 
@@ -205,7 +210,11 @@
                 this.form.submit('post','/employee')
                 .then(response => toastr.success('Creado con exito!', 'Empleado'))
                 .catch(error => this.form.errors.record(error.errors));
-            }
+            },
+            getDestination(){
+                let url = 'destination/list/' + this.status + '?page='+this.destinations.current_page;
+                axios.get(url).then(response => this.destinations = response.data);
+            },
         }
     });
 

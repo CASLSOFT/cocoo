@@ -1,6 +1,6 @@
 <div class="menu">
     <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">Menu de Navegación de {{ Auth()->user()->username }}</li>
         <li class="active">
             <a href="{{ route('home') }}">
                 <i class="material-icons">home</i>
@@ -25,7 +25,7 @@
                         <i class="material-icons col-amber">search</i>
                         <span>Consultar</span>
                     </a>
-                </li>                
+                </li>
             </ul>
         </li>
 
@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <a href="{{ route('he.create') }}">
                         <i class="material-icons col-light-blue">hourglass_empty</i>
@@ -99,13 +99,65 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('libranza.tbamortizacion') }}">
+                            <a href="{{ route('tbAmortizacion.tbAmortizacion') }}">
                                 <i class="material-icons col-amber">table_chart</i>
                                 <span>Tabla Amortizacion</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+                <i class="material-icons">settings</i>
+                <span>Configuración</span>
+            </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="{{ route('permissions.assing.nomina') }}">
+                        <i class="material-icons col-light-blue">add_circle_outline</i>
+                        <span>Asignar Permiso a Roles</span>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="javascript:void(0);">
+                        <span>Menu Item - 2</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons col-green">list_alt</i>
+                        <span>Roles y Permisos</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('roles.create') }}">
+                                <i class="material-icons col-light-blue">add_circle_outline</i>
+                                <span>Crear Role</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('permissions.create') }}">
+                                <i class="material-icons col-light-blue">add_circle_outline</i>
+                                <span>Crear Permisos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <span>Level - 3</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span>Level - 4</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> --}}
             </ul>
         </li>
     </ul>

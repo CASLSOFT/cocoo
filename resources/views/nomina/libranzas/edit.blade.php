@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <p><b># Cuota De:</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <p><b># Cuota Hasta</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
@@ -51,26 +51,37 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <p><b>Entidad Recaudadora</b></p>
                                 <div class="input-group input-group-md">
                                     <div class="form-line">
-                                        <input type="text" name="entidad" class="form-control text-center" v-model="fillLibranza.entidad" disabled="true">
+                                        <input type="text" name="entidad" class="form-control text-center" v-model="fillLibranza.entidad">
                                         <span  class="label label-danger" v-if="fillLibranza.errors.has('entidad')" v-text="fillLibranza.errors.get('entidad')"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group label-floating">
-                                    {{-- crear una tabla con estos campos --}}
-                                    <label class="control-label">Categoria</label>
-                                    <select class="form-control" v-model="fillLibranza.category" name="category">
-                                        <option value="LIBRANZA">Libranza</option>
-                                        <option value="DESCUENTO">Descuento Voluntario</option>
-                                        <option value="EMBARGO">Embargo</option>
-                                    </select>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{-- crear una tabla con estos campos --}}
+                                        <label class="control-label">Categoria</label>
+                                        <select class="form-control" v-model="fillLibranza.category" name="category">
+                                            <option value="LIBRANZA">Libranza</option>
+                                            <option value="DESCUENTO">Descuento Voluntario</option>
+                                            <option value="EMBARGO">Embargo</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <span  class="label label-danger" v-if="fillLibranza.errors.has('category')" v-text="fillLibranza.errors.get('category')"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b>Fecha Inicio:</b></p>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="date" name="startdate" class="form-control" v-model="fillLibranza.startdate">
+                                    </div>
+                                    <span  class="label label-danger" v-if="fillLibranza.errors.has('startdate')" v-text="fillLibranza.errors.get('startdate')"></span>
+                                </div>
                             </div>
                             <div class="col-md-2">
                                 <p><b>Qincena</b></p>

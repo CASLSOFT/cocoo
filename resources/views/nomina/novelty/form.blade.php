@@ -9,6 +9,7 @@
 @endsection
 
 @section('page-content')
+@can(['novelty.create']) {{-- validamos que el usuario tenga los permisos --}}
     <div class="container-fluid">
         @if($errors->all())
             <div class="alert alert-warning" role="alert">
@@ -25,64 +26,70 @@
                             <h4 class="title">Crear Periodo</h4>
                         </font>
                     </div>
-                    <div class="body" id="novedades">
-                        <form method="POST" action="{{ route('novelty.store') }}" >                        
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <fieldset>
-                                    <legend>Periodo de Novedad</legend>
-                                        <div class="col-md-3">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Fecha Inicial</label>
-                                                <input type="date" name="f_initial" class="form-control" v-model="f_initial">
-                                            </div>                                            
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Fecha Final</label>
-                                                <input type="date" name="f_final" class="form-control" v-model="f_final">
-                                            </div>                                            
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Tipo Nomina</label>
-                                                 <select class="form-control" name="type_nomina" v-model="type_nomina">
-                                                    <option value="">Seleccione</option>
-                                                    <option value="P">Oficina Principal</option>
-                                                    <option value="F">Farmacias</option>
-                                                    <option value="T">Todos</option>
-                                                </select>
-                                            </div>                                            
-                                        </div>
-                                        <div class="col-md-2">
-                                            <br>    
-                                            <button type="submit" class="btn btn-primary pull-right" >crear</button>                                            
-                                        </div>  
-                                    </fieldset>
-                                </div>                                
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Observaciones:</label>
-                                        <ckeditor name="observation" v-model="observation"></ckeditor>
+                        <div class="body" id="novedades">
+                            <form method="POST" action="{{ route('novelty.store') }}" >
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                        <legend>Periodo de Novedad</legend>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Fecha Inicial</label>
+                                                    <input type="date" name="f_initial" class="form-control" v-model="f_initial">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Fecha Final</label>
+                                                    <input type="date" name="f_final" class="form-control" v-model="f_final">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Tipo Nomina</label>
+                                                     <select class="form-control" name="type_nomina" v-model="type_nomina">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="P">Oficina Principal</option>
+                                                        <option value="F">Farmacias</option>
+                                                        <option value="T">Todos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <br>
+                                                <button type="submit" class="btn btn-primary pull-right" >crear</button>
+                                            </div>
+                                        </fieldset>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Observaciones:</label>
+                                            <ckeditor name="observation" v-model="observation"></ckeditor>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @else
+                        <div class="body" style="background-color:#CD5DDD;">
+                            <font color="white">
+                                <h3 class="title">No Tienes permiso para los parametros selecionados</h3>
+                            </font>
+                        </div>
+                </div>
             </div>
-            
-            </div> 
+            </div>
         </div>
     </div>
+@endcan
 @endsection
 
 @section('footer-scripts')
 <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script>    
+<script>
 
     var vm = new Vue({
         el: '#main',
@@ -92,7 +99,7 @@
             f_final:'',
             type_nomina:'',
             observation:'',
-            actualiza: true,            
+            actualiza: true,
             noveltys: {
                 total: 0,
                 per_page: 2,
@@ -100,11 +107,11 @@
                 to: 0,
                 current_page: 1
             },
-            offset: 4 
+            offset: 4
         },
         mounted() {
             this.getNoveltys();
-        },        
+        },
         methods: {
             create(datos) {
                 this.form.submit('post','/nomina/novelty')
@@ -122,10 +129,10 @@
             },
             getNoveltys() {
                 let url = '/nomina/novelty?page='+this.noveltys.current_page;
-                axios.get(url).then(response => {                        
+                axios.get(url).then(response => {
                         this.noveltys = response.data;
                     });
-            },            
+            },
             getEdit(item) {
                 this.identificaion = item.id;
                 this.f_initial = item.f_initial;
@@ -138,13 +145,13 @@
             // updateNovelty(id) {
             //     let url = '/nomina/novelty/'+id;
             //     this.fillNovelty.submit('put',url)
-            //     .then(response => {                    
+            //     .then(response => {
             //         this.fillNovelty;
             //         $('#edit').modal('hide');
             //         toastr.success('Actualizado', 'Novedad Actualizada');
             //         this.getNoveltys();
             //     })
-            //     .catch(error => 
+            //     .catch(error =>
             //         {
             //             if (error.message) {
             //                 toastr.error(error.message, 'Periodo de Novedad');

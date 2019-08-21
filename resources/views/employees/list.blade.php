@@ -9,6 +9,7 @@
 @endsection
 @section('page-content')
 <div class="col-lg-10">
+    @can('employee.list')
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="col-md-6">
@@ -45,7 +46,9 @@
                             <td v-text="item.salary"></td>
                             <td v-text="item.type_nomina" style="text-align: center;"></td>
                             <td>
+                                @can('employee.edit')
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser"><i class="material-icons">edit</i></a>
+                                @endcan
                             </td>
                         </tr>
                     </tbody>
@@ -56,6 +59,7 @@
         </div>
         <!-- /.panel-body -->
     </div>
+    @endcan
     <!-- /.panel -->
 </div>
 

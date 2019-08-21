@@ -1,0 +1,1 @@
+<img src="{{ asset($imagen) }}" class="img-thumbnail" style="width: 40px; height: 40px;">

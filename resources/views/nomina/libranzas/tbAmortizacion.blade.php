@@ -8,6 +8,7 @@
 
 @endsection
 @section('page-content')
+@can('amortizacion.tbamortizacion')
 <div class="col-md-10">
     <div class="card">
         <div class="header bg-green">
@@ -40,7 +41,6 @@
         <!-- /.panel-body -->
     </div>
     <!-- /.panel -->
-
 </div>
 
 {{-- Tabla --}}
@@ -50,9 +50,11 @@
             <div class="col-md-8" >
                 Tabla de Amortización
             </div>
-            <div class="col-md-1">
-                <a href="{{ route('getaddtbamortizacion') }}"><i class="material-icons md-48">add_circle</i></a>
-            </div>
+            @can('amortizacion.addtbamortizacion')
+                <div class="col-md-1">
+                    <a href="{{ route('getaddtbamortizacion') }}"><i class="material-icons md-48">add_circle</i></a>
+                </div>
+            @endcan
             <div class="col-md-3">
                 <p><b>Filtrar Por Categoria</b></p>
                 <select class="form-control" name="category" @change="filterxcategory" v-model="category">
@@ -94,8 +96,12 @@
                             <td v-text="item.fecha_inic" style="text-align: center" width="10%"></td>
                             <td v-text="item.fecha_final" style="text-align: center" width="10%"></td>
                             <td style="text-align: center" width="20%">
+                                @can('amortizacion.edit')
                                 <a href="#" @click.prevent="getEdit(item)" data-target="#Modal"><i class="material-icons">edit</i></a>
+                                @endcan
+                                @can('amortizacion.destroy')
                                 <a href="#" @click.prevent="getDelete(item.id)"><i class="material-icons col-red">delete</i></a>
+                                @endcan
                             </td>
                         </tr>
                     </tbody>
@@ -108,6 +114,7 @@
     </div>
     <!-- /.panel -->
 </div>
+@endcan
 
 <!-- Modal -->
 

@@ -63,7 +63,7 @@ class AmortizacionController extends Controller
         return $amorizacion;
     }
 
-    public function tbamortizacion()
+    public function tbAmortizacion()
     {
         return view('nomina.libranzas.tbAmortizacion');
     }
@@ -77,7 +77,7 @@ class AmortizacionController extends Controller
         return $amorizacion;
     }
 
-    public function getaddtbamortizacion()
+    public function getAddtbAmortizacion()
     {
         return view('nomina.libranzas.addAmortizacion');
     }
@@ -88,7 +88,7 @@ class AmortizacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addtbamortizacion(Request $request, AmortizacionLibranza $amorizacionlibranza)
+    public function addTbAmortizacion(Request $request, AmortizacionLibranza $amorizacionlibranza)
     {
         $this->validate($request, [
             'cuota_mensual'   => 'required|numeric',

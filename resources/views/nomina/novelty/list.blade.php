@@ -11,51 +11,60 @@
 @section('page-content')
 
 <div class="col-lg-10">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            Listado de Amortizaciones
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Fecha Inicial</th>
-                            <th>Fecha Final</th>
-                            <th>Tipo</th>
-                            <th style="text-align: center">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in noveltys.data">
-                            <td v-text="index+1"></td>
-                            <td v-text="item.f_initial"></td>
-                            <td v-text="item.f_final"></td>
-                            <td v-text="item.type_nomina"></td>
-                            <td style="text-align: center">
-                                <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser" title="Modificar Registro">
-                                    <i class="material-icons">mode_edit</i>
-                                </a>
-                                <a href="#" @click.prevent="getDelete(item.id)" title="Eliminar Registro"><i class="material-icons">delete</i></a>
-                                <a :href="'pdf/' + item.id" target=”_blank” title="Exportar a PDF"><i class="material-icons xs-3">picture_as_pdf</i></a>
-                                <a :href="'excel/' + item.id" title="Exportar a Excel"><i class="material-icons xs-3">file_copy</i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
+    @can('novelty.list') {{-- validamos que el usuario tenga los permisos --}}
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Listado de Novedades
             </div>
-            <!-- /.table-responsive -->
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha Inicial</th>
+                                <th>Fecha Final</th>
+                                <th>Tipo</th>
+                                <th style="text-align: center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in noveltys.data">
+                                <td v-text="index+1"></td>
+                                <td v-text="item.f_initial"></td>
+                                <td v-text="item.f_final"></td>
+                                <td v-text="item.type_nomina"></td>
+                                <td style="text-align: center">
+                                    @can('novelty.edit')
+                                        <a href="#" @click.prevent="getEdit(item)" data-target="#ModalUser" title="Modificar Registro">
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    @endcan
+                                    @can('novelty.destroy')
+                                        <a href="#" @click.prevent="getDelete(item.id)" title="Eliminar Registro"><i class="material-icons">delete</i></a>
+                                    @endcan
+                                    <a :href="'pdf/' + item.id" target=”_blank” title="Exportar a PDF"><i class="material-icons xs-3">picture_as_pdf</i></a>
+                                    <a :href="'excel/' + item.id" title="Exportar a Excel"><i class="material-icons xs-3">file_copy</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <vue-pagination  :pagination="noveltys" @paginate="getNoveltys()" :offset="2"></vue-pagination>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
         </div>
-        <!-- /.panel-body -->
-    </div>
+
+    @endcan
     <!-- /.panel -->
 </div>
 
 {{-- MODAL para editar novedad --}}
-@include('nomina.novelty.edit')
+@can('novelty.edit') {{-- validamos que el usuario tenga los permisos --}}
+    @include('nomina.novelty.edit')
+@endcan
 
 @endsection
 

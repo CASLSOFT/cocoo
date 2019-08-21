@@ -29,6 +29,13 @@ class NoveltyController extends Controller
         return response()->json($noveltys);
     }
 
+    public function list()
+    {
+         $noveltys = Novelty::orderBy('id', 'DESC')->paginate(10);
+
+        return view('nomina.novelty.list', compact('novelty'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,37 +62,12 @@ class NoveltyController extends Controller
 
         //validamos las amortizaciones
         if ($this->validateFechas($request)->count() > 0) {
-
             return redirect()->back()->withErrors(['message' => 'Novedad de este Lapso Creado']);
-
-            // return new JsonResponse(['message' => 'Novedad de este Lapso Creado'], 422);
         }
 
         $novelty->create($request->all());
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -97,11 +79,6 @@ class NoveltyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'f_initial' => 'required|date',
-        //     'f_final'   => 'required|date',
-        //     'type_nomina'   => 'required|in:P,F,T'
-        // ]);
         $novelty = Novelty::findOrFail($id);
 
         $novelty->observation = $request->get("observation");
@@ -150,9 +127,9 @@ class NoveltyController extends Controller
         $tnls = $TNL->getTNLsNovelty($novelty, $fechafinal, $fechafinal);
         $lms = $TNL->getLMNovelty($novelty, $fechafinal, $fechafinal);
 
-        $hec = $novelty->getHEC($fechainicial, $nomina);
+        $hec = $novelty->getHEC($fechainicial, $fechafinal, $nomina);
 
-        $retencion = $novelty->getRetention($fechainicial, $nomina);
+        $retencion = $novelty->getRetention($fechainicial, $fechafinal, $nomina);
 
         // Consultas para llenar PDF
 
@@ -195,13 +172,6 @@ class NoveltyController extends Controller
         })->download('xlsx');
     }
 
-    public function list()
-    {
-         $noveltys = Novelty::orderBy('id', 'DESC')->paginate(10);
-
-        return view('nomina.novelty.list', compact('novelty'));
-    }
-
     // public function prueba($id)
     // {
     //     $tnl = new TNL();
@@ -212,38 +182,5 @@ class NoveltyController extends Controller
 
     //     return $tnl->getLMNovelty($novelty, $mes1, $mes2);
     // }
-    // public function export_xls($expense_id, $file_format_id)
-    // {
-    //     $expense = Expense::find($expense_id);
-    //     $file_format = FileFormat::find($file_format_id);
-    //     $routes = DB::table('buy_orders') ->join('expenses','expenses.id','=','buy_orders.expense_id')
-    //         ->join('users','expenses.user_id','=','users.id') ->select( 'buy_orders.code', 'buy_orders.cost_center', 'buy_orders.book_account', 'buy_orders.active', 'buy_orders.expenditure', 'buy_orders.inventory', 'buy_orders.quantity', 'buy_orders.price_unit', 'buy_orders.description', 'buy_orders.estimated_value', 'buy_orders.destination', 'buy_orders.delivery_date' )
-    //         ->where('buy_orders.expense_id','=',$expense_id)
-    //         ->orderBy('buy_orders.created_at','desc')
-    //         ->get();
 
-    //     $data = json_decode(json_encode((array) $routes), true);
-
-    //     Excel::load('/storage/app/template.xls', function($file) use($expense, $data){
-    //         $file->setActiveSheetIndex(0)
-    //         ->setCellValue('D8', $expense->user->name);
-
-    //         $file->setActiveSheetIndex(0)
-    //         ->setCellValue('L8', $expense->application_date);
-
-    //         $file->setActiveSheetIndex(0)
-    //         ->setCellValue('P8', $expense->code);
-
-    //         $file->setActiveSheetIndex(0)
-    //         ->setCellValue('D45', $expense->description);
-
-    //         $row = 13; foreach($data as $key => $temp) {
-    //             $col = 1;
-    //             foreach(array_keys($temp) as $value) {
-    //                 $file->getActiveSheet()
-    //                 ->setCellValueByColumnAndRow($col, $row, $temp[$value]);
-    //                 $col++;
-    //             } $row++;
-    //         } })->export('xls');
-    // }
 }

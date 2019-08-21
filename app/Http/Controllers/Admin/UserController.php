@@ -49,8 +49,8 @@ class UserController extends Controller
             'lastname'  => 'required|min:3',
             'username'  => 'required|unique:users,username',
             'email'     => 'required|unique:users,email',
-            'area'      => 'required|in:administracion,comercial,farmacia',          
-            'state'     => 'required'           
+            'area'      => 'required|in:administracion,comercial,farmacia',
+            'state'     => 'required'
             ]);
 
         $user = new User();
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return $user =  User::findOrFail($id);
     }
 
     /**
@@ -112,6 +112,13 @@ class UserController extends Controller
         return;
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $users = User::where('username','like','%'.$query.'%')->get();
+        return response()->json($users);
+    }
+
     public function active($id)
     {
         $user = User::findOrFail($id);
@@ -120,7 +127,7 @@ class UserController extends Controller
 
         $user->save();
 
-        $users = User::orderBy('id', 'DESC')->paginate(5);
+        $users = User::orderBy('id', 'DESC')->paginate(10);
 
         return [
             'pagination' => [
@@ -135,14 +142,12 @@ class UserController extends Controller
         ];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function crear_rol(Request $request)
     {
-        //
+       $rol=new Role;
+       $rol->name=$request->input("rol_nombre") ;
+       $rol->slug=$request->input("rol_slug") ;
+       $rol->description=$request->input("rol_descripcion") ;
+       $rol->save();
     }
 }

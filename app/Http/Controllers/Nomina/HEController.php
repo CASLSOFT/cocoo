@@ -20,16 +20,16 @@ class HEController extends Controller
     }
 
     public function list()
-    {        
+    {
         $hes = DB::table('employees')
                         ->join('hes', function($join){
                             $join->on('employees.id', '=', 'hes.employee_id');
-                        })                        
+                        })
                         ->select('employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'hes.id', 'hes.lapso', 'hes.value', 'hes.typeHE')
                         ->groupBy('hes.id','employees.id', 'employees.firstname', 'employees.lastname', 'employees.co', 'hes.lapso', 'hes.value', 'hes.typeHE')
                         ->orderBy('hes.id', 'DES')
                         ->paginate(2);
-        
+
         return $hes;
     }
 
@@ -61,28 +61,6 @@ class HEController extends Controller
         $he->create($request->all());
 
         return $he;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

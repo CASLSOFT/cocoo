@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('img/icon.jpg') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -85,24 +85,9 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-            <!-- User Info -->
-            {{-- <div class="user-info">
-                <div class="image">
-                    <img src="{{ asset('images/user-img-background.jpg') }}" width="48" height="48" alt="User" />
-                </div>
-                <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->username }}</div>
-                    <div class="email">{{ Auth::user()->email }}</div>
-                </div>
-            </div> --}}
-            <!-- #User Info -->
+
             <!-- Menu -->
             @include('menus.menuleft')
-            {{-- @if ($_SERVER["REQUEST_URI"] == "/home")
-                @include('menus.menuleft')
-            @else
-                @include('layouts.nomina')
-            @endif  --}}
 
             <!-- #Menu -->
             <!-- Footer -->
